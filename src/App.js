@@ -1,8 +1,20 @@
+import React from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './components/Header'
+import Login from './pages/Login'
+import Register from './pages/Register'
+import Notfound from './pages/NotFound';
+
 function App() {
   return (
-    <div className="App">
-      <h1>Hello, Tauana lindaaa!!!!</h1>
-    </div>
+    <BrowserRouter>
+      <Header />
+      <Routes>
+      <Route path="/login/*" element={<Login />}></Route>
+      <Route path="/" element={<Register />}></Route>
+      <Route path="*" element={<Notfound />}></Route>
+      </Routes>    
+    </BrowserRouter>
   );
 }
 
