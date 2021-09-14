@@ -1,14 +1,19 @@
 import Button from '../components/button/Button';
+import Input from '../components/Input'
 import { Link } from 'react-router-dom';
+
 
 const login = () => {
     return (
         <div>
-            Tela inicial
-            <Button variant="active">
+            <p class="slogan">Hambúrguer de outro planeta</p>
+            <Input type="email" label="Email" id="name" />
+            <Input type="password" label="Senha" id="password" />
+
+            <Button variant="neon-on"> 
                 <Link to="/hall">Entrar</Link>
-            </Button>
-            <Button variant="desative">
+            </Button> 
+            <Button variant="neon-off">
                 <Link to="/register">Cadastrar</Link>
             </Button>
 
