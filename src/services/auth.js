@@ -15,10 +15,6 @@ export const Register = (users) => {
 )};
 
 
-
-
-
-
 export const loginWithEmailPassword = (users) => {
   return  fetch("https://lab-api-bq.herokuapp.com/auth", {
     method: "POST",
@@ -31,26 +27,3 @@ export const loginWithEmailPassword = (users) => {
     })
   });
 };
-
-
-// async function Testando() {
-  // const request = {
-  //   method: 'POST',
-  //   headers: {
-  //     "name": "",
-  //     "email": "",
-  //     "password": "",
-  //     "role": "",
-  //     "restaurant": ""
-  //   },
-  // };
-
-//   let response = await fetch('https://lab-api-bq.herokuapp.com/api-docs/#/users/createUser')
-//   let userData = await response.json();
-//   let [user1, user2] = await Promise.all([Testando(1), Testando(2)])
-//   console.log(user1, user2)
-
-//   return userData;
-// };
-
-// console.log(Testando())
