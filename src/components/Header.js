@@ -1,9 +1,9 @@
-// import React from 'react'
 
+import img from '../assets/logo.svg'
 const Header = () => {
     return (
         <header>
-            <h1>Ovni Burguer</h1>
+            <img src={img} alt="logo"/>
         </header>
     )
 }
