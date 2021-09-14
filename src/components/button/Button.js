@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.css'; 
+import './Button.css'; 
 
 const Button = (props) => {
     const batata = `abacaxi ${props.variant}`;
