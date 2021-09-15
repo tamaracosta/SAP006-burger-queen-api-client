@@ -19,7 +19,8 @@ body {
     color: var(--yellow);
     font-family: 'Aldrich', sans-serif;
     background-image: url("./assets/background-tijolo.png");
-    
-    
 }
 
+.msgErrs {
+    color: var(--pink);
+}
