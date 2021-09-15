@@ -1,11 +1,19 @@
-import Fields from './fieldsFom.js';
+import FieldsForm from './fieldsFom.js';
+import { useState } from 'react';
 
 const Form = () => {
+  const [submitted, setSubmitted] = useState(false);
+
+  function submitForm() {
+    setSubmitted(true);
+  }
+
   return (
-    <div>
+    <>
+
       <h1>Página para cadastro</h1>
-      <Fields />
-    </div>
+      <FieldsForm />
+    </>
   )
 }
 
