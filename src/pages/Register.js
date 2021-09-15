@@ -1,10 +1,8 @@
+import Form from '../components/formRegister/Form.js';
 
-const Register= () => {
+const Register = () => {
     return (
-        <div>
-            <h1>Página para cadastro</h1>
-            <button>Finalizar Cadastro</button>
-        </div>
+        <Form />
     )
 }
 
