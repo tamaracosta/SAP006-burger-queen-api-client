@@ -1,14 +1,23 @@
 import { useState } from "react";
 
-const StateForm = () => {
+const StateForm = (validation) => {
   const [values, setValues] = useState({
     userName: '',
     userEmail: '',
     password: '',
     password2: '',
     autoComplete: ''
-  })
- //  useEffect const [errors, setErrors] = useState({});
+  });
+
+  const [errors, setErrors] = useState({
+    userName: '',
+    userEmail: '',
+    password: '',
+    password2: '',
+    autoComplete: ''
+  });
+
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -20,9 +29,13 @@ const StateForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  }
 
-  return { values, handleChange, handleSubmit }
+    setErrors(validation(values));
+    setSubmitted(true);
+    // conecção com api
+  };
+
+  return { values, handleChange, handleSubmit, errors };
 }
 
 export default StateForm;
