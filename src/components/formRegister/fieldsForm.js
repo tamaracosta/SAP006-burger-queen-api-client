@@ -1,56 +1,69 @@
 
 import Input from "../Input";
 import StateForm from "./StateForm";
-import Button from "../button/Button.js";
 import ErrorsMenssage from './validation';
 
-export const FieldsForm = (submitForm) => {
-  const { values, handleChange, handleSubmit, errors } = StateForm(submitForm, ErrorsMenssage);
+export const FieldsForm = () => {
+  const { values, handleChange, handleSubmit, errors } = StateForm(ErrorsMenssage);
 
   return (
     <form className="test" onSubmit={handleSubmit}>
-      <label htmlFor="userName">Nome</label>
-      <Input
-        id="userName"
-        type="text"
-        name="userName"
-        placeholder="your name"
-        value={values.userName}
+      <label htmlFor="name">Nome</label>
+      <Input  id="name"  type="text" name="name" placeholder="your name"
+        value={values.name}
         onChange={handleChange}
       />
-      {errors.userName && <p className="msgErrs">{errors.userName}</p>}
-      <label htmlFor="userEmail">Email</label>
+      {errors.name && <p className="msgErrs">{errors.name}</p>}
+      <label htmlFor="email">Email</label>
       <Input
-        id="userEmail"
+        id="email"
         type="text"
-        name="userEmail"
+        name="email"
         autoComplete="username"
         placeholder="email@example.com"
-        value={values.userEmail}
+        value={values.email}
         onChange={handleChange}
       />
-      {errors.userEmail && <p className="msgErrs">{errors.userEmail}</p>}
-      <label htmlFor="password">Sua senha</label>
+      {errors.email && <p className="msgErrs">{errors.email}</p>}
+      <label htmlFor="password">Crie sua senha</label>
       <Input
         id="password"
         type="password"
-        placeholder="Your secret password"  
+        name="password"
+        placeholder="Your secret password"
         autoComplete="new-password"
-        values={values.password}
+        value={values.password}
         onChange={handleChange}
       />
       {errors.password && <p className="msgErrs">{errors.password}</p>}
-      <label htmlFor="password2">Confirme sua senha</label>
+      <label htmlFor="role">Confirme sua senha</label>
       <Input
-        id="password2"
+        id="role"
         type="password"
-        placeholder="Confirm your password" 
+        name="role"
+        placeholder="Confirm your password"
         autoComplete="new-password"
-        values={values.password2}
+        value={values.role}
         onChange={handleChange}
       />
-       {errors.password2 && <p className="msgErrs">{errors.password2}</p>}
-      <Button type="suBmit">Finalizar Cadastro</Button>
+      {errors.role && <p className="msgErrs">{errors.role}</p>}
+
+      <label>Salão</label>
+      <Input 
+        type="radio"
+        name="roleHall"
+        value={values.roleHall}
+        onChange={handleChange}
+      />
+      <label>Cozinha</label>
+      <Input
+        type="radio"
+        name="roleKitchen"
+        value={values.roleKitchen}
+        onChange={handleChange}
+      />
+
+      <button>Finalizar Cadastro</button>
     </form>
   )
 }
