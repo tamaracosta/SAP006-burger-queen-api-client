@@ -1,21 +1,14 @@
-import { useState } from "react";
-
-export async function UserPost() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [role, setRole] = useState('')
-
-  return fetch('https://lab-api-bq.herokuapp.com/users', {
+export async function UserCreate(name, email, password, role) {
+  return await fetch('https://lab-api-bq.herokuapp.com/users', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      name,
-      email,
-      password,
-      role,
+      name: name,
+      email: email,
+      password: password,
+      role: role,
       restaurant: "Ovnir Burger"
     }),
   }
@@ -28,5 +21,18 @@ export async function UserPost() {
   })
 };
 
-export default UserPost;
 
+export const LoginWithEmailPassword = async (email, password) => {
+  console.log(111, email, password)
+  return await fetch("https://lab-api-bq.herokuapp.com/auth", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify ({
+      email: email,
+      password: password
+    })
+  }).then(response => response.json());
+
+};

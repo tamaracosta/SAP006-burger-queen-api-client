@@ -1,12 +1,13 @@
 import React from 'react'
 import './Button.css'; 
 
-const Button = (props) => {
-    const batata = `abacaxi ${props.variant}`;
+const Button = ({children, ...props}) => {
+    const variant = props.className ? props.className : "";
+    const batata = `btn-class ${variant}`;
 
     return (
-        <button className={batata}>
-           {props.children}
+        <button {...props} className={batata}>
+           {children}
         </button>
     )
 };
