@@ -15,15 +15,17 @@ export const Register = (users) => {
 )};
 
 
-export const loginWithEmailPassword = (users) => {
-  return  fetch("https://lab-api-bq.herokuapp.com/auth", {
+export const LoginWithEmailPassword = async (email, password) => {
+  console.log(111, email, password)
+  return await fetch("https://lab-api-bq.herokuapp.com/auth", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify ({
-      "email": users.email,
-      "password": users.password
+      email: email,
+      password: password
     })
-  });
+  }).then(response => response.json());
+
 };
