@@ -1,4 +1,4 @@
-import img from '../assets/logo.svg'
+import img from '../../assets/logo.svg'
 import { Container } from './HeaderStyle';
 
 const Header = () => {
