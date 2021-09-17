@@ -1,5 +1,4 @@
 import React from 'react'
-import './Button.css'; 
 
 const Button = ({children, ...props}) => {
     const variant = props.className ? props.className : "";
