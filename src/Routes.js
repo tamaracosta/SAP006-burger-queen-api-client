@@ -1,7 +1,7 @@
 import {  BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 
 import Login from './pages/Login/Login';
-import Register from './pages/Register';
+import Register from './pages/register/Register';
 import Notfound from './pages/NotFound';
 import Hall from './pages/Hall';
 import Kitchen from './pages/Kitchen';
