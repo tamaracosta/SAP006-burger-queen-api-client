@@ -1,18 +1,25 @@
-export const Register = (users) => {
-  return fetch('https://lab-api-bq.herokuapp.com/users', {
+export async function UserCreate(name, email, password, role) {
+  return await fetch('https://lab-api-bq.herokuapp.com/users', {
     method: "POST",
-      headers: {
+    headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-       name: users.name,
-       email: users.email,
-       password: users.password,
-       role: "sample role",
-       restaurant: "Ovni Burger"
-    })
+      name: name,
+      email: email,
+      password: password,
+      role: role,
+      restaurant: "Ovnir Burger"
+    }),
   }
-)};
+  ).then(response => {
+    console.log(response);
+    return response.json();
+  }).then(json => {
+    console.log(json);
+    return json
+  })
+};
 
 
 export const LoginWithEmailPassword = async (email, password) => {
