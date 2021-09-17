@@ -1,9 +1,9 @@
-import Form from '../components/formRegister/Form.js';
+// import Form from '../components/formRegister/Form.js';
 
-const Register = () => {
-    return (
-        <Form />
-    )
-}
+// const Register = () => {
+//     return (
+//        console.loh(Register)
+//     )
+// }
 
-export default Register
+// export default Register
