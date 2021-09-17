@@ -1,13 +1,13 @@
-import React from 'react'
-
+import React from 'react';
+import { Container } from './InputStyle';
 
 const Input = ({label, id, ...props}) => {
 
     return (
-        <div className='wrapper'>
+        <Container className='wrapper'>
             <label htmlFor={id}>{label}</label>
             <input id={id} {...props}/>
-        </div>
+        </Container>
     )
 }
 
