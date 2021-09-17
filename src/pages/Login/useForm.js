@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { LoginWithEmailPassword } from '../../services/auth';
-import ErrorsMessage from '../../services/ValidationForm.js';
+// import ErrorsMessage from '../../services/ValidationForm.js';
 
-const useForm = () => {
+const useForm = (validation) => {
   const [messageError, setMessageError] = useState('');
 
   const [values, setValues] = useState({
     email: '',
     password: '',
   });
-
-  // const [errors, setErrors] = useState({
-  //   email: '',
-  //   password: '',
-  // });
+  
+  const [errors, setErrors] = useState({
+    email: '',
+    password: '',
+  });
 
   // const [submitting, setSubmitting] = useState(false);
 
@@ -28,11 +28,11 @@ const useForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (ErrorsMessage(values)) {
-      LoginWithEmailPassword(values.email, values.password)
+    (setErrors(validation(values)));
+    console.log(values);
+  
+    LoginWithEmailPassword(values.email, values.password)
         .then((response) => {
-
-          console.log(response.message)
 
           if (response.code && response.code === 400) {
             alert(response.message)
@@ -46,7 +46,6 @@ const useForm = () => {
           setMessageError('Erro na requisição. [' + error.message + ']');
           console.log(messageError)
         })
-    }
 
     // (setErrors(validation(values)));
     // console.log(values);
@@ -54,7 +53,7 @@ const useForm = () => {
     // conecção com api deve ser aqui
   };
 
-  return { handleChange, handleSubmit };
+  return { handleChange, handleSubmit, errors };
 }
 
 export default useForm;
