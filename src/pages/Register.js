@@ -1,11 +1,9 @@
+// import Form from '../components/formRegister/Form.js';
 
-const Register= () => {
-    return (
-        <div>
-            <h1>Página para cadastro</h1>
-            <button>Finalizar Cadastro</button>
-        </div>
-    )
-}
+// const Register = () => {
+//     return (
+//        console.loh(Register)
+//     )
+// }
 
-export default Register
+// export default Register

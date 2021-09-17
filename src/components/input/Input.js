@@ -7,7 +7,6 @@ const Input = ({label, id, ...props}) => {
         <Container className='wrapper'>
             <label htmlFor={id}>{label}</label>
             <input id={id} {...props}/>
-            {/* <p className='error'>Error</p> */}
         </Container>
     )
 }
