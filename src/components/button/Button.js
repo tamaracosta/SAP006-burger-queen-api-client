@@ -1,14 +1,14 @@
 import React from 'react'
-import './Button.css'; 
+import { Container } from './ButtonStyle';
 
 const Button = ({children, ...props}) => {
     const variant = props.className ? props.className : "";
     const batata = `btn-class ${variant}`;
 
     return (
-        <button {...props} className={batata}>
+        <Container {...props} className={batata}>
            {children}
-        </button>
+        </Container>
     )
 };
 
