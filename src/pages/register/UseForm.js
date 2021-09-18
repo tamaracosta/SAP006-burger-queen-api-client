@@ -1,19 +1,26 @@
 import { useState } from "react";
-import { useHistory } from 'react-router-dom'
-import { LoginWithEmailPassword } from '../../services/auth';
+// import { useHistory } from 'react-router-dom'
+import { UserCreate } from '../../services/auth';
 
-const useForm = (validation) => {
-  const clearToken =  localStorage.clear();
+
+const UseForm = (validation) => {
+  // const clearToken =  localStorage.clear();
   const [messageError, setMessageError] = useState('');
 
   const [values, setValues] = useState({
+    name: '',
     email: '',
     password: '',
+    confirmPassword: '',
+    role: '',
   });
 
   const [errors, setErrors] = useState({
+    name: '',
     email: '',
     password: '',
+    confirmPassword: '',
+    role: '',
   });
 
   const handleChange = (e) => {
@@ -24,14 +31,14 @@ const useForm = (validation) => {
     });
   };
 
-  const history = useHistory()
+  // const history = useHistory()
 
-  const routerHall = () => {
-    history.push('/hall')
-  }
-  const routerKitchen = () => {
-    history.push('/kitchen')
-  }
+  // const routerHall = () => {
+  //   history.push('/hall')
+  // }
+  // const routerKitchen = () => {
+  //   history.push('/kitchen')
+  // }
 
 
   const handleSubmit = (e) => {
@@ -41,25 +48,17 @@ const useForm = (validation) => {
     console.log(values);
 
     if(errors) {
-      LoginWithEmailPassword(values.email, values.password)
+      UserCreate(values.name, values.email, values.password, values.role)
         .then((response) => {
 
           if (response.code && response.code === 400) {
             console.log(response.message)
           } else {
-           console.log('ok' + response.token);
+            console.log('ok' + response.token);
             localStorage.setItem('token', response.token);
 
             const id = response.id
             localStorage.setItem("id", id)
-
-            if (response.role === "hall") {
-              routerHall();
-               clearToken();
-            } if (response.role === "kitchen") {
-              routerKitchen();
-              clearToken();
-            }
           }
 
         })
@@ -73,4 +72,5 @@ const useForm = (validation) => {
   return { handleChange, handleSubmit, errors };
 }
 
-export default useForm;
+
+export default UseForm;
