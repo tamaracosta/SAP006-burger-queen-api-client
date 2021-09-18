@@ -16,7 +16,7 @@ const Register = () => {
           type="text"
           onChange={handleChange}
         />
-        <p className="errorMessage"> {errors.name && errors.name}</p>
+        <p> {errors.name && errors.name}</p>
 
         <label htmlFor="email">Email</label>
         <Input
@@ -24,7 +24,7 @@ const Register = () => {
           type="email"
           onChange={handleChange}
         />
-        <p className="errorMessage"> {errors.email && errors.email}</p>
+        <p> {errors.email && errors.email}</p>
 
         <label htmlFor="password">Senha</label>
         <Input
@@ -32,7 +32,7 @@ const Register = () => {
           type="password"
           onChange={handleChange}
         />
-        <p className="errorMessage"> {errors.password && errors.password}</p>
+        <p> {errors.password && errors.password}</p>
 
         <label htmlFor="confirmPassword">Confirme sua senha</label>
         <Input
@@ -40,7 +40,7 @@ const Register = () => {
           type="password"
           onChange={handleChange}
         />
-        <p className="errorMessage"> {errors.password && errors.password}</p>
+        <p> {errors.password && errors.password}</p>
 
         <label htmlFor="role">Selecione sua função</label>
         <Input
