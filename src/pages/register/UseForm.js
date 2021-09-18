@@ -48,13 +48,13 @@ const UseForm = (validation) => {
     console.log(values);
 
     if(errors) {
-      UserCreate()
+      UserCreate(values.name, values.email, values.password, values.role)
         .then((response) => {
 
           if (response.code && response.code === 400) {
             console.log(response.message)
           } else {
-            alert('ok' + response.token);
+            console.log('ok' + response.token);
             localStorage.setItem('token', response.token);
 
             const id = response.id
