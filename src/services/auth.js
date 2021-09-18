@@ -1,4 +1,4 @@
-export async function UserCreate(name, email, password, role) {
+export const UserCreate = async (name, email, password, role) => {
   return await fetch('https://lab-api-bq.herokuapp.com/users', {
     method: "POST",
     headers: {
@@ -11,26 +11,26 @@ export async function UserCreate(name, email, password, role) {
       role: role,
       restaurant: "Ovnir Burger"
     }),
-  })
-  .then(response => response.json())
-  .then((json) => {
-    if(json.code === 409) {
-      throw new Error();
-    }
-    return json;
-  })
-  .catch((err) => err);
+  }).then(res => res.json())
+    .then((json) => {
+      console.log(json);
+      if (json.code === 400) {
+        throw new Error();
+      }
+      return json;
+    })
+    .catch((err) => err);
 };
 
 
 export const LoginWithEmailPassword = async (email, password) => {
-  console.log(email, password)
+  console.log(111, email, password)
   return await fetch("https://lab-api-bq.herokuapp.com/auth", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify ({
+    body: JSON.stringify({
       email: email,
       password: password
     })
