@@ -4,7 +4,7 @@ import Button from "../../components/button/Button";
 import ErrorsMessage from "./ValidationForm";
 import { Link } from 'react-router-dom';
 
-const LoginDeus = () => {
+const LoginUser = () => {
   const { handleChange, handleSubmit, errors } = useForm(ErrorsMessage);
 
   return (
@@ -34,4 +34,4 @@ const LoginDeus = () => {
   )
 }
 
-export default LoginDeus;
+export default LoginUser;
