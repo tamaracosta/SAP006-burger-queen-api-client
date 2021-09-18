@@ -47,7 +47,7 @@ const useForm = (validation) => {
           if (response.code && response.code === 400) {
             console.log(response.message)
           } else {
-            console.log('ok' + response.token);
+           console.log('ok' + response.token);
             localStorage.setItem('token', response.token);
 
             const id = response.id
@@ -55,7 +55,7 @@ const useForm = (validation) => {
 
             if (response.role === "hall") {
               routerHall();
-              clearToken();
+               clearToken();
             } if (response.role === "kitchen") {
               routerKitchen();
               clearToken();
