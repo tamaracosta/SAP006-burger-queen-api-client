@@ -2,10 +2,16 @@ import UseForm from "./UseForm";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import ErrorsMessage from "./ValidationForm";
-// import { Link } from 'react-router-dom';
+import { useState } from "react";
+import Modal from "../../components/modal/Modal";
+import { Link } from 'react-router-dom';
 
 const Register = () => {
   const { handleChange, handleSubmit, errors } = UseForm(ErrorsMessage);
+  const [showModal, setShowModal] = useState(false);
+  const openModal = () => {
+    setShowModal(prev => !prev)
+  }
 
   return (
     <section>
@@ -55,8 +61,14 @@ const Register = () => {
           onChange={handleChange}
           value="cozinheiro"
         />
-        <Button onClick={handleSubmit}>Cadastre-se</Button>
+              
+        <Button onClick={openModal}>Cadastre-se</Button>
+        
       </form>
+      <Modal showModal={showModal} setShowModal={setShowModal}>
+        <p>Cadastro realizado com sucesso!</p>
+        <Link to="/login"><Button>Fazer Login</Button></Link>
+      </Modal>
     </section>
   )
 }
