@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { LoginWithEmailPassword } from '../../services/auth';
 
 const useForm = (validation) => {
-  const clearToken =  localStorage.clear();
+  localStorage.clear();
   const [messageError, setMessageError] = useState('');
 
   const [values, setValues] = useState({
@@ -43,22 +43,25 @@ const useForm = (validation) => {
     if(errors) {
       LoginWithEmailPassword(values.email, values.password)
         .then((response) => {
+          console.log('response', response);
 
           if (response.code && response.code === 400) {
             console.log(response.message)
           } else {
-           console.log('ok' + response.token);
+           console.log('ok' , response.token);
             localStorage.setItem('token', response.token);
+            localStorage.setItem("id", response.id);
 
-            const id = response.id
-            localStorage.setItem("id", id)
-
-            if (response.role === "hall") {
+            if (response.role === "atendente") {
               routerHall();
-               clearToken();
-            } if (response.role === "kitchen") {
+               
+            } 
+            else if (response.role === "cozinheiro") {
               routerKitchen();
-              clearToken();
+              
+            }
+            else {
+              alert('função/role desconhecida '+response.role);
             }
           }
 
