@@ -49,13 +49,17 @@ const Register = () => {
         <p> {errors.password && errors.password}</p>
 
         <label htmlFor="role">Selecione sua função</label>
+        <p>Atendente</p>
         <Input
+          placeholder="atendente"
           name="role"
           type="radio"
           onChange={handleChange}
           value="atendente"
         />
+        <p>Cozinheiro</p>
         <Input
+          placeholder="cozinheiro"
           name="role"
           type="radio"
           onChange={handleChange}
