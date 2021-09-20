@@ -26,7 +26,7 @@ const LoginUser = () => {
         />
         <p className="errorMessage">{errors.password && errors.password}</p>
 
-        <Button onClick={handleSubmit}>Entrar</Button>
+        <Button>Entrar</Button>
         <p>ou</p>
             <p>Primeira vez? <Link to="/register">Cadastre-se aqui</Link></p>
       </form>

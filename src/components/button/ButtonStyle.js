@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.button `
   background: transparent;
-  font-size: 1rem;
+  font-size: 1.2rem;
   min-width: 8rem;
   cursor: pointer;
   border: 2px solid var(--pink);
