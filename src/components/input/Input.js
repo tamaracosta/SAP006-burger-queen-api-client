@@ -4,7 +4,7 @@ import { Container } from './InputStyle';
 const Input = ({label, id, ...props}) => {
 
     return (
-        <Container className='wrapper'>
+        <Container>
             <label htmlFor={id}>{label}</label>
             <input id={id} {...props}/>
         </Container>

@@ -12,7 +12,7 @@ export const ErrorsMenssage = (values) => {
   }
 
   if (!values.password) {
-    errors.password = 'Preencha seu senha'
+    errors.password = 'Preencha sua senha'
   } else if (values.password.length < 6) {
     errors.password = 'Sua senha deve conter mais de 6 caracteres';
   }

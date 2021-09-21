@@ -12,14 +12,14 @@ export const UserCreate = async (name, email, password, role) => {
       restaurant: "Ovnir Burger"
     }),
   }).then(res => res.json())
-    .then((json) => {
-      console.log(json);
-      if (json.code === 400) {
-        throw new Error();
-      }
-      return json;
-    })
-    .catch((err) => err);
+    // .then((json) => {
+    //   // console.log(json);
+    //   // if (json.code === 400) {
+    //   //   console.log('deu erro')
+    //   //   throw new Error('aconteceu algum erro');
+    //   // }
+    //   return json;
+    // });
 };
 
 
