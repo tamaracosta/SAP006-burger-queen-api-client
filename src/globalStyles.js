@@ -31,10 +31,26 @@ body {
 }
 
 .container {
-    max-width: 50rem;
-    margin: auto;
-    text-align: center;
+    text-align: center; 
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
+.ocultar-senha {
+    position: absolute;
+    
+}
+
+.login-eye {
+    cursor: pointer;
+    margin-left: -30px;
+    
+}
+
+.option-role {
+    display: flex;
+    
+}
 
 `
