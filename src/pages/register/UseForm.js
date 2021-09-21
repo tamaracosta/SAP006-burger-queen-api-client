@@ -1,12 +1,9 @@
 import { useState } from "react";
-// import { useHistory } from 'react-router-dom'
 import { UserCreate } from '../../services/auth';
 
-
 const UseForm = (validation) => {
-  // const clearToken =  localStorage.clear();
-  const [messageError, setMessageError] = useState('');
-
+  localStorage.clear();
+  
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -31,40 +28,26 @@ const UseForm = (validation) => {
     });
   };
 
-  // const history = useHistory()
-
-  // const routerHall = () => {
-  //   history.push('/hall')
-  // }
-  // const routerKitchen = () => {
-  //   history.push('/kitchen')
-  // }
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = (callback) => {
+    
     (setErrors(validation(values)));
     console.log(values);
 
     if(errors) {
       UserCreate(values.name, values.email, values.password, values.role)
         .then((response) => {
+          console.log(111, response)
 
           if (response.code && response.code === 400) {
             console.log(response.message)
           } else {
             console.log('ok' + response.token);
-            localStorage.setItem('token', response.token);
-
-            const id = response.id
-            localStorage.setItem("id", id)
+            callback();
           }
 
         })
         .catch((error) => {
-          setMessageError('Erro na requisição. [' + error.message + ']');
-          console.log(messageError)
+          console.log('Erro na requisição. [' + error.message + ']')
         })
       }
   };

@@ -119,6 +119,7 @@ const Register = () => {
               value="cozinheiro"
             />
           </div>
+          
         </div>
               
         <Button onClick={()=>handleSubmit(callModal)}>Cadastre-se</Button>
