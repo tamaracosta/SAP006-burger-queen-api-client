@@ -9,26 +9,33 @@ const LoginUser = () => {
 
   return (
     <section>
-      <form action="" onSubmit={handleSubmit}>
-        <label htmlFor="email">Email</label>
+      <form className="container" action="" onSubmit={handleSubmit}>
         <Input
+          label="Email"
+          id="email"
           name="email"
           type="text"
           onChange={handleChange}
+          placeholder="Digite o seu email"
         />
         {errors.email && <p>{errors.email && errors.email}</p>}
 
-        <label htmlFor="email">Senha</label>
+        
         <Input
+          label="Senha"
+          id="password"
           name="password"
           type="password"
           onChange={handleChange}
+          placeholder="Digite a sua senha"
         />
         <p className="errorMessage">{errors.password && errors.password}</p>
 
         <Button>Entrar</Button>
         <p>ou</p>
-            <p>Primeira vez? <Link to="/register">Cadastre-se aqui</Link></p>
+        <p style={{fontSize: '1.2em', margin: '2em'}} className="link-register">Primeira vez? <Link className="link" to="/register" style={{color: 'var(--pink)',
+        display: 'block'}}>Cadastre-se aqui</Link></p>
+
       </form>
     </section>
   )
