@@ -1,8 +1,8 @@
-export const ErrorsMenssage = (values) => {
+export const ErrorsMessage = (values) => {
   let errors = {};
   
   if (values.name === '') {
-    errors.userName = 'Preencha seu nome';
+    errors.name = 'Preencha seu nome';
   } 
   
   if (!values.email) {
@@ -25,4 +25,4 @@ export const ErrorsMenssage = (values) => {
   return errors;
 }
 
-export default ErrorsMenssage;
+export default ErrorsMessage;
