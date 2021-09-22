@@ -50,51 +50,51 @@ const Register = () => {
           placeholder="Digite o seu email"
         />
         <p> {errors.email && errors.email}</p>
-        <div>
-        <Input
-          label="Senha"
-          id="password"
-          name="password"
-          type={showPassword ? 'type': 'password'}
-          onChange={handleChange}
-          placeholder="Digite a sua senha"
-        />
-         <span className="login-eye">
-          {showPassword? 
-          (<FaEye
-            size={20}
-            onClick={handleClick} /> ):
-          (<FaEyeSlash
-            size={20}
-            onClick={handleClick}  />)}
-        </span> 
-        
-        <p> {errors.password && errors.password}</p>
-        </div>
-      <div>
-        <Input
-          label="Confirme sua senha"
-          id="confirmPassword"
-          name="confirmPassword"
-          type={showPassword2 ? 'type': 'password'}
-          onChange={handleChange}
-          placeholder="Digite a sua senha novamente"
-        />
-        <span className="login-eye">
-        {showPassword2? 
-          (<FaEye 
-            data-eye="2"       
-            size={20}
-            onClick={handleClick2} /> ):
-          (<FaEyeSlash
-            data-eye="2"
-            size={20}
-            onClick={handleClick2}  />)}
-        </span> 
 
-        <p> {errors.password && errors.password}</p>
-        
-      </div>
+        <div>
+          <Input
+            label="Senha"
+            id="password"
+            name="password"
+            type={showPassword ? 'type': 'password'}
+            onChange={handleChange}
+            placeholder="Digite a sua senha"
+          />
+         <span className="login-eye">
+            {showPassword? 
+            (<FaEye
+              size={20}
+              onClick={handleClick} /> ):
+            (<FaEyeSlash
+              size={20}
+              onClick={handleClick}  />)}
+          </span> 
+          <p> {errors.password && errors.password}</p>
+        </div>
+
+        <div>
+          <Input
+            label="Confirme sua senha"
+            id="confirmPassword"
+            name="confirmPassword"
+            type={showPassword2 ? 'type': 'password'}
+            onChange={handleChange}
+            placeholder="Digite a sua senha novamente"
+          />
+          <span className="login-eye">
+          {showPassword2? 
+            (<FaEye 
+              data-eye="2"       
+              size={20}
+              onClick={handleClick2} /> ):
+            (<FaEyeSlash
+              data-eye="2"
+              size={20}
+              onClick={handleClick2}  />)}
+          </span> 
+          <p> {errors.confirmPassword && errors.confirmPassword}</p>
+        </div>
+
         <p>Selecione sua função</p>
         <div>
           <div className="choose-role">
