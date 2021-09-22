@@ -31,8 +31,7 @@ export const LoginWithEmailPassword = async (email, password) => {
       email: email,
       password: password
     })
-  }).then(response => response.json());
-
+  }).then(res => res.json());
 };
 
 export const GetAllProducts = async () => {
