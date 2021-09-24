@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import img from './assets/background-tijolo.png';
 
 export default createGlobalStyle `
 
@@ -13,22 +12,29 @@ export default createGlobalStyle `
 
 :root {
     --white: #FFF;
+    --light-white: #dadada;
     --black: #000000;
+    --light-black: #121212;
     --pink: #F72585;
     --light-pink: #F9B1D2;
-    --yellow: #FAFF02;
+    --yellow: #F6C964;
     --dark-purple: #050441;
     --grey: #4D4C80;
-    --red: red;   
+    --red: red;
+    --light-orange: #CE8E43;
+    --dark-orange: #E29D4B;   
 }
 
 body {
     color: var(--light-pink);
     font-family: 'Open Sans', sans-serif;
-    background-image: url(${img});
-      
-    
+    font-size: 1.2em;
+
+    @media (min-width: 768px) {
+    font-size: 1.5em;
+  }
 }
+   
 
 .container {
     text-align: center; 
@@ -45,11 +51,6 @@ body {
 .login-eye {
     cursor: pointer;
     margin-left: -30px;
-    
-}
-
-.option-role {
-    display: flex;
     
 }
 
