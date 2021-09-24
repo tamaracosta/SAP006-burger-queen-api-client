@@ -6,6 +6,9 @@ import { useState } from "react";
 import Modal from "../../components/modal/Modal";
 import { Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import ImgBackgroundStyle from "../../components/img-background/ImgBackgroundStyle";
+import Radio from "../../components/radio/Radio";
+import { SecundaryParagraph } from "../../components/tipography/TipographyStyle";
 
 const Register = () => {
   const { handleChange, handleSubmit, errors } = UseForm(ErrorsMessage);
@@ -28,7 +31,9 @@ const Register = () => {
   }
 
    return (
+     
     <section>
+      <ImgBackgroundStyle />
       <form className="container" action="" onSubmit={(e)=>e.preventDefault()}>
         
         <Input
@@ -39,7 +44,7 @@ const Register = () => {
           onChange={handleChange}
           placeholder="Digite o seu nome completo"
         />
-        <p> {errors.name && errors.name}</p>
+        <SecundaryParagraph>{errors.name && errors.name}</SecundaryParagraph>
 
         <Input
           label="Email"
@@ -49,7 +54,7 @@ const Register = () => {
           onChange={handleChange}
           placeholder="Digite o seu email"
         />
-        <p> {errors.email && errors.email}</p>
+         <SecundaryParagraph>{errors.email && errors.email}</SecundaryParagraph>
 
         <div>
           <Input
@@ -69,7 +74,7 @@ const Register = () => {
               size={20}
               onClick={handleClick}  />)}
           </span> 
-          <p> {errors.password && errors.password}</p>
+          <SecundaryParagraph> {errors.password && errors.password}</SecundaryParagraph>
         </div>
 
         <div>
@@ -92,14 +97,15 @@ const Register = () => {
               size={20}
               onClick={handleClick2}  />)}
           </span> 
-          <p> {errors.confirmPassword && errors.confirmPassword}</p>
+          <SecundaryParagraph>{errors.confirmPassword && errors.confirmPassword}</SecundaryParagraph>
         </div>
 
         <p>Selecione sua função</p>
         <div>
           <div className="choose-role">
-            <Input
+            <Radio
               className="option-role"
+              text="Atendente"
               label="Atendente"
               id="role-hall"
               name="role"
@@ -109,8 +115,9 @@ const Register = () => {
             />
           </div>
           <div className="choose-role">
-            <Input
+            <Radio
               className="option-role"
+              text="Cozinheiro"
               label="Cozinheiro"
               id="role-kitchen"
               name="role"
