@@ -8,6 +8,7 @@ export default createGlobalStyle `
     box-sizing: border-box;
     text-decoration: none;
     
+    
 }
 
 :root {
@@ -15,20 +16,20 @@ export default createGlobalStyle `
     --light-white: #dadada;
     --black: #000000;
     --light-black: #121212;
-    --pink: #F72585;
-    --light-pink: #F9B1D2;
     --yellow: #F6C964;
     --dark-purple: #050441;
     --grey: #4D4C80;
+    --dark-grey: #363636;
     --red: red;
     --light-orange: #CE8E43;
     --dark-orange: #E29D4B;   
 }
 
 body {
-    color: var(--light-pink);
+    color: #CE8E43;
     font-family: 'Open Sans', sans-serif;
     font-size: 1.2em;
+    background-color: var(--light-black);
 
     @media (min-width: 768px) {
     font-size: 1.5em;
