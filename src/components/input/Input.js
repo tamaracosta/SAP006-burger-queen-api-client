@@ -1,13 +1,13 @@
 import React from 'react';
-import { Container } from './InputStyle';
+import * as S from './InputStyle';
 
 const Input = ({label, id, ...props}) => {
 
     return (
-        <Container>
-            <label htmlFor={id}>{label}</label>
-            <input id={id} {...props}/>
-        </Container>
+        <S.Container>
+            <S.Label htmlFor={id}>{label}</S.Label>
+            <S.InputStyle id={id} {...props}/>
+        </S.Container>
     )
 }
 

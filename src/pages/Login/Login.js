@@ -3,12 +3,21 @@ import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import ErrorsMessage from "./ValidationForm";
 import { Link } from 'react-router-dom';
+import ImgBackgroundStyle from "../../components/img-background/ImgBackgroundStyle";
+import { LinkStyle, Paragraph } from "../../components/tipography/TipographyStyle";
+import { SecundaryParagraph } from "../../components/tipography/TipographyStyle";
+
+
 
 const LoginUser = () => {
   const { handleChange, handleSubmit, errors } = useForm(ErrorsMessage);
 
   return (
+    
     <section>
+    <ImgBackgroundStyle />
+     
+
       <form className="container" action="" onSubmit={handleSubmit}>
         <Input
           label="Email"
@@ -18,7 +27,7 @@ const LoginUser = () => {
           onChange={handleChange}
           placeholder="Digite o seu email"
         />
-        {errors.email && <p>{errors.email && errors.email}</p>}
+        <SecundaryParagraph>{errors.email && errors.email}</SecundaryParagraph>
 
         
         <Input
@@ -29,15 +38,16 @@ const LoginUser = () => {
           onChange={handleChange}
           placeholder="Digite a sua senha"
         />
-        <p className="errorMessage">{errors.password && errors.password}</p>
+        <SecundaryParagraph>{errors.password && errors.password}</SecundaryParagraph>
 
         <Button>Entrar</Button>
-        <p>ou</p>
-        <p style={{fontSize: '1.2em', margin: '2em'}} className="link-register">Primeira vez? <Link className="link" to="/register" style={{color: 'var(--pink)',
-        display: 'block'}}>Cadastre-se aqui</Link></p>
+        <Paragraph>ou</Paragraph>
+        <Paragraph>Primeira vez?</Paragraph>
+        <Link to="/register"><LinkStyle>Cadastre-se aqui</LinkStyle></Link>
 
       </form>
     </section>
+    
   )
 }
 
