@@ -14,8 +14,8 @@ top: 0;
 export const ModalWrapper = styled.div `
 width: 50vw;
 height: 50vh;
-box-shadow: 0 5px 16px var(--pink);
-background: var(--black);
+box-shadow: 0 5px 16px var(--dark-orange);
+background: var(--light-black);
 color: #000;
 display: grid;
 position: relative;
@@ -36,7 +36,7 @@ color: red;
 
     p{
         margin-bottom: 1rem;
-        color: var(--light-pink);
+        color: var(--light-orange);
         font-size: 1.5em;
         text-align: center;
         margin-bottom: 2em;
@@ -52,5 +52,5 @@ width: 32px;
 height: 32px;
 padding: 0;
 z-index: 10;
-color: var(--light-pink);
+color: var(--light-orange);
 `;
