@@ -43,7 +43,7 @@ const useForm = (validation) => {
     if(errors) {
       LoginWithEmailPassword(values.email, values.password)
         .then((response) => {
-          console.log('response', response);
+          console.log('response', response.token);
 
           if (response.code && response.code === 400) {
             console.log(response.message)
