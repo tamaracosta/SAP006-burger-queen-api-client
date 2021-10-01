@@ -46,24 +46,3 @@ test('selected cook', done => {
   fireEvent.change(iptCook, { target: { value: "cozinheiro" } });
 });
 
-
-
-
-
-
-
-
-//test('renders learn react link', () => {
-  //   render(<Input />);
-  // const linkElement = screen.getByText(/aqui/i);
-  // expect(linkElement).toBeInTheDocument();
-  //   console.log(linkElement);
-  // });
-
-  // import { render, screen } from '@testing-library/react';
-  // import Button from './components/button/Button';
-
-  // describe('Button component', () => {
-  //   describe('button render', () => {
-  //     const label = 'voabebe'
-  //     render(<Button> {label} </Button>);
