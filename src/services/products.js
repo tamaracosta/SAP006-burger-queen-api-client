@@ -1,24 +1,38 @@
 const baseURL = 'https://lab-api-bq.herokuapp.com';
-const token  = localStorage.getItem("token");
+const token = localStorage.getItem("token");
 
 export const GetAllProducts = async () => {
   return await fetch(`${baseURL}/products`, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
-      'Authorization':`${token}`
+      'Authorization': `${token}`
     },
   }).then(res => res.json())
 }
 
-export const ProductsId = async () => {
-  return await fetch('https://lab-api-bq.herokuapp.com/products{productId}', {
+export const PostOrders = async (client, table, allProducts) => {
+  return await fetch(`${baseURL}/orders`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': `${token}`,
+    },
+    body: JSON.stringify({
+      client: client,
+      table: table,
+      products: allProducts,
+    })
+  })
+}
+
+export const GetOrders = async () => {
+  return await fetch(`${baseURL}/orders`, {
     method: 'GET',
     headers: {
       "Content-Type": "application/json",
-      'Accept': 'application/json',
+      'Authorization': `${token}`,
     },
-  }).then(res => res.json())
+  })
+  .then(res => res.json())
 }
-
-console.log(ProductsId);
