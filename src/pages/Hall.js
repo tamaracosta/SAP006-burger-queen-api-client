@@ -5,9 +5,12 @@ import { Title } from '../components/card/header/HeaderCardStyle';
 import HeaderCard from '../components/card/header/HeaderCard';
 import BodyCard from '../components/card/body/BodyCard';
 import { BackgroundCard, DivProduct } from '../components/card/body/BodyCardStyle.js';
-import { MdDelete } from 'react-icons/md';
-import { MdLocalDrink } from 'react-icons/md';
+import { MdDelete , MdLocalDrink} from 'react-icons/md';
 import Button from '../components/button/Button';
+import { Paragraph } from '../components/tipography/TipographyStyle.js';
+import Header from '../components/header/Header.js';
+import { useHistory } from 'react-router-dom';
+import { Logout } from '../components/logout/Logout.js';
 
 
 const Hall = () => {
@@ -23,6 +26,7 @@ const Hall = () => {
     const [mesa, setMesa] = useState('');
     const [pedido, setPedido] = useState([]);
     const [allValue, setAllValue] = useState('');
+    
 
 
 
@@ -124,12 +128,24 @@ const Hall = () => {
         setAllValue(total)
         console.log(total)
     }
+   
+    
+    
+      
+    
+   
+
+    
+
 
 
 
     return (
         <>
-            <h1>Hall</h1>
+        <Header showLogOut={true} />
+        
+              
+            <h1>Salão</h1>
 
             <label>Nome do Cliente</label>
             <input
@@ -193,8 +209,8 @@ const Hall = () => {
             <div className="container">
                 <BackgroundCard>
                     <h3>Comanda</h3>
-                    <p>Cliente: {nome}</p>
-                    <p>Mesa: {mesa}</p>
+                    <Paragraph>Cliente: {nome}</Paragraph>
+                    <Paragraph>Mesa: {mesa}</Paragraph>
 
                     {pedido.map((item, index) => (
                         <DivProduct key={item.id}>
@@ -208,7 +224,7 @@ const Hall = () => {
                         </DivProduct>
                     ))}
 
-                    <p>Valor Total: R${allValue} </p>
+                    <Paragraph>Valor Total: R${allValue} </Paragraph>
                     <Button onClick={() => enviarResume()}>Enviar</Button>
                 </BackgroundCard>
 

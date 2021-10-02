@@ -1,6 +1,7 @@
 
 import { GetOrders } from '../services/products';
 import { useState, useEffect } from 'react';
+import Header from '../components/header/Header';
 
 const Cozinha = () => {
     const [cozinha, setCozinha] = useState([]);
@@ -12,6 +13,8 @@ const Cozinha = () => {
     }, [])
 
     return (
+        <>
+        <Header showLogOut={true} />
         <div>
             <h1>Cozinha</h1>
             <>
@@ -30,6 +33,7 @@ const Cozinha = () => {
             </>
 
         </div>
+        </>
     )
 }
 

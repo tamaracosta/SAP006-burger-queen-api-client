@@ -7,6 +7,7 @@ border: 2px solid #5d3f09;
 background-color: var(--dark-grey);
 border-radius: 10px;
 box-shadow: 0 0 1em orange;
+margin-bottom: 1.5em;
 
 
 

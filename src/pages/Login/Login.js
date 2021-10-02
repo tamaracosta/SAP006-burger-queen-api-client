@@ -6,13 +6,15 @@ import { Link } from 'react-router-dom';
 import ImgBackgroundStyle from "../../components/img-background/ImgBackgroundStyle";
 import { LinkStyle, Paragraph } from "../../components/tipography/TipographyStyle";
 import { SecundaryParagraph } from "../../components/tipography/TipographyStyle";
-
-
+import Header from "../../components/header/Header";
 
 const LoginUser = () => {
   const { handleChange, handleSubmit, errors } = useForm(ErrorsMessage);
 
   return (
+
+    <>
+    <Header />
     
     <section>
     <ImgBackgroundStyle />
@@ -47,7 +49,7 @@ const LoginUser = () => {
 
       </form>
     </section>
-    
+    </>
   )
 }
 
