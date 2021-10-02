@@ -1,10 +1,38 @@
-const HEADERS_API = { "Content-Type": "application/json", 
-"Authorization": localStorage.getItem("token") }
+const baseURL = 'https://lab-api-bq.herokuapp.com';
+const token = localStorage.getItem("token");
 
-export const ProductsAll = async () => {
-  return await fetch('https://lab-api-bq.herokuapp.com/products', {
+export const GetAllProducts = async () => {
+  return await fetch(`${baseURL}/products`, {
     method: 'GET',
-    HEADERS_API,
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': `${token}`
+    },
+  }).then(res => res.json())
+}
+
+export const PostOrders = async (client, table, allProducts) => {
+  return await fetch(`${baseURL}/orders`, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': `${token}`,
+    },
+    body: JSON.stringify({
+      client: client,
+      table: table,
+      products: allProducts,
+    })
+  })
+}
+
+export const GetOrders = async () => {
+  return await fetch(`${baseURL}/orders`, {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json",
+      'Authorization': `${token}`,
+    },
   })
   .then(res => res.json())
 }
