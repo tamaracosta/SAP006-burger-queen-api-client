@@ -1,30 +1,32 @@
 import { useState } from 'react';
 import { Button } from './ToggleBtnStyle';
 
-const ToggleBtn = () => {
-    const [count, setCount ] = useState(0)
+const ToggleBtn = ({ callback, idProduct, nameProduct, price }) => {
+  const [count, setCount] = useState(0)
+  
+  function increase() {
+    let currentCount = count + 1
+    setCount(currentCount)
+    callback(idProduct, nameProduct, currentCount, price )
+  }
 
-    function increase() {
-        setCount(count+1)
-        
+  function decrease() {
+    let currentCount = count - 1
+    if (count > 0) {
+      setCount(currentCount)
+      callback(idProduct, nameProduct, currentCount, price )
     }
+  }
 
-    function decrease() {
-        if(count > 0) {
-            setCount(count-1)          
-       }   
-    }
+  const colorBtnDecrease = (count === 0 ? '#a7a7a7' : 'black')
 
-    const colorBtnDecrease = (count === 0 ? '#a7a7a7': 'black')
-
-    return (
-        <div>
-            <Button onClick={decrease} style={{color: colorBtnDecrease}}>-</Button> 
-            <Button >{count}</Button> 
-           <Button onClick={increase}>+</Button>                   
-
-        </div>
-    )
+  return (
+    <>
+      <Button onClick={decrease} style={{ color: colorBtnDecrease }}>-</Button>
+      <Button >{count}</Button>
+      <Button onClick={increase}>+</Button>
+    </>
+  )
 }
 
 export default ToggleBtn
