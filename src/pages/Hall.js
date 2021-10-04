@@ -9,8 +9,7 @@ import { MdDelete , MdLocalDrink} from 'react-icons/md';
 import Button from '../components/button/Button';
 import { Paragraph } from '../components/tipography/TipographyStyle.js';
 import Header from '../components/header/Header.js';
-import { useHistory } from 'react-router-dom';
-import { Logout } from '../components/logout/Logout.js';
+
 
 
 const Hall = () => {
