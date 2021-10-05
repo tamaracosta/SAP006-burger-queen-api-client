@@ -13,10 +13,11 @@ const ImgBackgroundStyle = styled.div `
     position: fixed;
     background-size: cover;
     background-position: center;
+    filter: brightness(0.6);
 
     @media screen and (min-width: 768px) {
         background-image: url(${imgBigger});
-        filter: brightness(0.6);
+        
     }
 
 `
