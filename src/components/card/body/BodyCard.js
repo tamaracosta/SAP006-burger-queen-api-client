@@ -10,7 +10,6 @@ const BodyCard = ({ itens, showCard, callback }) => {
                 {itens.map(item =>
                 (
                     <DivProduct key={item.id}>
-                        <p> {item.id} </p>
                         <p> {item.name} </p>
                         <p> R$ {item.price} </p>
                         <ToggleBtn 

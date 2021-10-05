@@ -7,8 +7,11 @@ import BodyCard from '../components/card/body/BodyCard';
 import { BackgroundCard, DivProduct } from '../components/card/body/BodyCardStyle.js';
 import { MdDelete , MdLocalDrink} from 'react-icons/md';
 import Button from '../components/button/Button';
-import { Paragraph } from '../components/tipography/TipographyStyle.js';
+import { DefaultTitle, Paragraph } from '../components/tipography/TipographyStyle.js';
 import Header from '../components/header/Header.js';
+import Input from '../components/input/Input.js';
+import Modal from '../components/modal/Modal.js';
+
 
 
 
@@ -25,6 +28,8 @@ const Hall = () => {
     const [mesa, setMesa] = useState('');
     const [pedido, setPedido] = useState([]);
     const [allValue, setAllValue] = useState('');
+    const [showResume, setShowResume] = useState(false);
+    const [showModal, setShowModal] = useState(false);
     
 
 
@@ -89,19 +94,25 @@ const Hall = () => {
                 totalProductPrice: price * currentCount,
             },
         ];
+       
+        
+        
         setPedido(pedidoAtualizado);
-        console.log(pedido)
         totalValue(pedidoAtualizado);
     }
 
     const enviarResume = () => {
+        setShowModal(true)
         const allProducts = pedido.map((item) => {
+            
             const productsArr =
             {
                 id: item.id,
                 qtd: item.quantidade,
             }
+           
             return productsArr
+            
         })
         PostOrders(nome, mesa, allProducts)
         .then(console.log('oq tem aqui gay?'))
@@ -126,111 +137,123 @@ const Hall = () => {
         })
         setAllValue(total)
         console.log(total)
+
+        if (total > 0) {
+            setShowResume(true)
+        } else {
+            setShowResume(false)
+        }
+        
     }
-   
-    
-    
-      
-    
-   
-
-    
-
-
-
 
     return (
         <>
         <Header showLogOut={true} />
-        
-              
-            <h1>Salão</h1>
-
-            <label>Nome do Cliente</label>
-            <input
-                onChange={handleChange}
-                className="input"
-                type="text"
-                name="nameClient">
-            </input>
-
-
-            <label>Mesa</label>
-            <input
-                onChange={handleChangeTable}
-                className="input"
-                type="number"
-                name="tableClient"
-                step="any">
-            </input>
-
-
-            <HeaderCard onClick={() => handleClick("breakfast")}>
-                <GiCoffeeCup /><Title>Café da Manhã</Title>
-            </HeaderCard>
-            <BodyCard
-                itens={breakfast}
-                showCard={showBreakfast}
-                callback={addOrderResume}
-            />
-
-            <HeaderCard onClick={() => handleClick("hamburguer")}>
-                <GiHamburger />
-                <Title>Hambúrguer</Title>
-            </HeaderCard>
-            <BodyCard
-                itens={hamburguer}
-                showCard={showHamburguer}
-                callback={addOrderResume}
-            />
-
-            <HeaderCard onClick={() => handleClick("drink")}>
-                <MdLocalDrink />
-                <Title>Bebidas</Title>
-            </HeaderCard>
-            <BodyCard
-                itens={drink}
-                showCard={showDrink}
-                callback={addOrderResume}
-            />
-
-            <HeaderCard onClick={() => handleClick("side")}>
-                <GiFrenchFries />
-                <Title>Acompanhamento</Title>
-            </HeaderCard>
-            <BodyCard
-                itens={side}
-                showCard={showSide}
-                callback={addOrderResume}
-            />
-
+                      
+            <DefaultTitle>Salão</DefaultTitle>
 
             <div className="container">
-                <BackgroundCard>
-                    <h3>Comanda</h3>
-                    <Paragraph>Cliente: {nome}</Paragraph>
-                    <Paragraph>Mesa: {mesa}</Paragraph>
+                <Input
+                label="Nome do Cliente"
+                id="name"
+                className="input"
+                name="nameClient"
+                type="text"
+                onChange={handleChange}
+                
+                />
 
-                    {pedido.map((item, index) => (
-                        <DivProduct key={item.id}>
-                            <p>Id: {item.id} </p>
-                            <p>Qtd: {item.quantidade} x R${item.price} </p>
-                            <p> {item.name} </p>
-                            <p> R$ {item.totalProductPrice}</p>
-
-                            <MdDelete onClick={() => remove(index)} style={{ color: '#d13030', cursor: 'pointer' }} />
-
-                        </DivProduct>
-                    ))}
-
-                    <Paragraph>Valor Total: R${allValue} </Paragraph>
-                    <Button onClick={() => enviarResume()}>Enviar</Button>
-                </BackgroundCard>
-
+                
+                <Input
+                label="Mesa"
+                className="input"
+                name="tableClient"
+                type="number"
+                onChange={handleChangeTable}
+                step="any"
+                min="0"
+                
+                /> 
+               
+                                
             </div>
+
+            <div>
+
+                <HeaderCard onClick={() => handleClick("breakfast")}>
+                    <GiCoffeeCup /><Title>Café da Manhã</Title>
+                </HeaderCard>
+                <BodyCard
+                    itens={breakfast}
+                    showCard={showBreakfast}
+                    callback={addOrderResume}
+                />
+
+                <HeaderCard onClick={() => handleClick("hamburguer")}>
+                    <GiHamburger />
+                    <Title>Hambúrguer</Title>
+                </HeaderCard>
+                <BodyCard
+                    itens={hamburguer}
+                    showCard={showHamburguer}
+                    callback={addOrderResume}
+                />
+
+                <HeaderCard onClick={() => handleClick("drink")}>
+                    <MdLocalDrink />
+                    <Title>Bebidas</Title>
+                </HeaderCard>
+                <BodyCard
+                    itens={drink}
+                    showCard={showDrink}
+                    callback={addOrderResume}
+                />
+
+                <HeaderCard onClick={() => handleClick("side")}>
+                    <GiFrenchFries />
+                    <Title>Acompanhamento</Title>
+                </HeaderCard>
+                <BodyCard
+                    itens={side}
+                    showCard={showSide}
+                    callback={addOrderResume}
+                />
+            </div>
+
+            <Modal showModal={showModal} setShowModal={setShowModal} >
+                <p>Pedidos enviados com sucesso!</p>               
+            </Modal>
+
+
+{/* -----------------COMANDA ---------------------*/}
+            {showResume ? (
+               <div className="container">
+               <BackgroundCard>
+                   <h3>Comanda</h3>
+                   <Paragraph>Cliente: {nome}</Paragraph>
+                   <Paragraph>Mesa: {mesa}</Paragraph>
+
+                   {pedido.map((item, index) => (
+                       <DivProduct key={item.id}>
+                           <p>Id: {item.id} </p>
+                           <p>Qtd: {item.quantidade} x R${item.price} </p>
+                           <p> {item.name} </p>
+                           <p> R$ {item.totalProductPrice}</p>
+
+                           <MdDelete onClick={() => remove(index)} style={{ color: '#d13030', cursor: 'pointer' }} />
+
+                       </DivProduct>
+                   ))}
+
+                   <Paragraph>Valor Total: R${allValue} </Paragraph>
+                   <Button onClick={() => enviarResume()}>Enviar</Button>
+               </BackgroundCard>
+
+           </div>)
+        : null}
+        
         </>
     )
-
 
 
 }

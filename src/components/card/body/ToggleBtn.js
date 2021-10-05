@@ -22,9 +22,11 @@ const ToggleBtn = ({ callback, idProduct, nameProduct, price }) => {
 
   return (
     <>
-      <Button onClick={decrease} style={{ color: colorBtnDecrease }}>-</Button>
-      <Button >{count}</Button>
-      <Button onClick={increase}>+</Button>
+      <div>
+        <Button onClick={decrease} style={{ color: colorBtnDecrease }}>-</Button>
+        <Button >{count}</Button>
+        <Button onClick={increase}>+</Button>
+      </div>
     </>
   )
 }
