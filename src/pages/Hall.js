@@ -15,7 +15,6 @@ import Modal from '../components/modal/Modal.js';
 
 
 
-
 const Hall = () => {
     const [breakfast, setBreakfast] = useState([]);
     const [showBreakfast, setShowBreakfast] = useState(false);
