@@ -42,6 +42,11 @@ body {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 2em;
+
+    @media (min-width: 801px) {
+    width: 70%;       
+  }
 }
 
 .ocultar-senha {

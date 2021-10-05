@@ -21,4 +21,13 @@ margin: 0.8em auto;
 padding: 0.5em;
 
 `
+export const DivProductKitchen = styled.div `
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: space-between;
+margin: 0.8em auto;
+padding: 0.5em;
 
+
+`

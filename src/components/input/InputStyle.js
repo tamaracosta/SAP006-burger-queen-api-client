@@ -4,11 +4,15 @@ export const Container = styled.div `
    display: inline-block;
    width: 100%;
 
+   @media screen and (min-width: 481px) {
+        width: 80%;
+    }
+
    @media screen and (min-width: 768px) {
         width: 60%;
     }
         
-     @media screen and (min-width: 1024px) {
+    @media screen and (min-width: 1024px) {
         width: 51%;
             
     }
@@ -35,15 +39,24 @@ export const InputStyle = styled.input `
 `
 
 export const Label = styled.label `
-display: block;
-        font-size: 1.2em;
-        line-height: 1;
-        padding-bottom: 0.5rem;
-        text-align: left;
-        color: var(--light-orange)
+    display: block;
+    font-size: 1.2em;
+    line-height: 1;
+    padding-bottom: 0.5rem;
+    text-align: left;
+    color: var(--light-orange);
+
+    @media screen and (min-width: 728px) {
+    font-size: 1em;
+              
+  }
 `
     
- 
+export const InputNumber = styled(InputStyle) `
+    width: 10vw;
+
+
+`
   
 
 

@@ -2,7 +2,7 @@ import * as S from './HeaderCardStyle';
 
 const HeaderCard = ({ onClick, children}) => {
     return (
-        <div>
+        <div className="container">
             <S.ButtonCard onClick={onClick}>
                
                 <S.Content>{children}</S.Content>
