@@ -3,13 +3,13 @@ import { GetOrders } from '../services/products';
 import { useState, useEffect } from 'react';
 import Header from '../components/header/Header';
 
-const Cozinha = () => {
-    const [cozinha, setCozinha] = useState([]);
+const Kitchen = () => {
+    const [kitchen, setKitchen] = useState([]);
 
 
     useEffect(() => {
         GetOrders()
-            .then((json) => setCozinha(json))
+            .then((json) => setKitchen(json))
     }, [])
 
     return (
@@ -18,7 +18,7 @@ const Cozinha = () => {
         <div>
             <h1>Cozinha</h1>
             <>
-                {cozinha.map((item) => (
+                {kitchen.map((item) => (
                     <div key={item.id}>
                         <p>nome: {item.client_name} </p>
                         <p>mesa {item.table} </p>
@@ -37,4 +37,4 @@ const Cozinha = () => {
     )
 }
 
-export default Cozinha;
+export default Kitchen;
