@@ -17,8 +17,6 @@ export const UserCreate = async (name, email, password, role) => {
 
 
 export const LoginWithEmailPassword = async (email, password) => {
-  console.log(111, email, password)
-  
     return await fetch(`${baseURL}/auth`, {
     method: "POST",
     headers,
