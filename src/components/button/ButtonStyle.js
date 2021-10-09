@@ -22,14 +22,13 @@ export const Container = styled.button `
 `
 
 export const SecundaryButton = styled(Container)`
-background: green;
-color: var(--light-white);
+background: #0d2a0d;
+color: #cbcbcb;
 box-shadow: none;
 border: 2px solid green;
 
 &:hover {
 background: transparent;
-color: green;
 border: 2px solid green;
 color: green;
 box-shadow: 0 0 30px 10px green;
@@ -37,18 +36,51 @@ box-shadow: 0 0 30px 10px green;
 `
 
 export const TerciaryButton = styled(SecundaryButton)`
-background: var(--dark-orange);
-color: var(--white);
+background: var(--light-white);
+color: var(--green);
 box-shadow: none;
-border: 2px solid var(--dark-orange);
+border: 2px solid var(--green);
 
 
 &:hover {
-background: transparent;
-color: var(--dark-orange);
-border: 2px solid var(--dark-orange);
-color: var(--dark-orange);
-box-shadow: 0 0 30px 10px var(--dark-orange);
+box-shadow: 0 0 30px 10px green;
  }
+
+`
+
+export const QuarterButton = styled(TerciaryButton)`
+background: var(--dark-orange);
+color: var(--white);
+border: none;
+
+
+
+`
+
+export const RedButton = styled(TerciaryButton)`
+background: #9d0505;
+color: var(--white);
+border: none;
+
+&:hover {
+  box-shadow: 0 0 30px 10px #9d0505;
+  border: 2px solid #9d0505;
+  color: #9d0505;
+  
+}
+
+`
+
+export const GreenButton = styled(TerciaryButton)`
+background: #138b2f;
+color: var(--white);
+border: none;
+
+&:hover {
+  box-shadow: 0 0 30px 10px #138b2f;
+  border: 2px solid #138b2f;
+  color: #138b2f;
+  
+}
 
 `

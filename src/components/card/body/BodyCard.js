@@ -10,13 +10,19 @@ const BodyCard = ({ itens, showCard, callback }) => {
                 {itens.map(item =>
                 (
                     <DivProduct key={item.id}>
-                        <p> {item.name} </p>
+                        <p> {item.name.includes('Hambúrguer') ? null : item.name} </p>
+                        <p>{item.flavor}</p>
+                        <p>{item.complement}</p>
                         <p> R$ {item.price} </p>
+                        
                         <ToggleBtn 
                              callback={callback}
                              idProduct={item.id}
                              nameProduct={item.name}
                              price={item.price}
+                             quantityProduct={item.quantity}
+                             flavor={item.flavor}
+                             complement={item.complement}
                             />
                     </DivProduct>
                 )

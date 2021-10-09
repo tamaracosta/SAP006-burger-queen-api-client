@@ -22,7 +22,9 @@ export default createGlobalStyle `
     --dark-grey: #363636;
     --red: red;
     --light-orange: #CE8E43;
-    --dark-orange: #E29D4B;   
+    --dark-orange: #E29D4B;
+    --green: #0F7A1A;   
+     
 }
 
 body {
