@@ -2,8 +2,9 @@ import { BackgroundCard, DivProduct } from './BodyCardStyle';
 import ToggleBtn from './ToggleBtn';
 
 
-const BodyCard = ({ itens, showCard, callback }) => {
+const BodyCard = ({itens, showCard, callback }) => {
  
+
     return (
         <div className="container">
             <BackgroundCard style={{ 'display': (showCard ? 'block' : 'none') }}>

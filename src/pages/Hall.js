@@ -90,7 +90,6 @@ const Hall = () => {
         })
 
         setMenu(updatedMenu)
-        
         setOrder(updatedOrder);
         totalValue(updatedOrder);
     }
@@ -142,7 +141,7 @@ const Hall = () => {
         if (total > 0) {
             setShowResume(true)
         } else {
-            setShowResume(false)
+            total = 0
         }
     }
 
@@ -164,7 +163,6 @@ const Hall = () => {
     return (
         <>
             <Header showLogOut={true} />
-                        
             <DefaultTitle>Salão</DefaultTitle>
             <div className="container">
                 <Link to="/readyorders"><SecundaryButton>Pedidos Prontos</SecundaryButton></Link>
@@ -233,6 +231,7 @@ const Hall = () => {
                     callback={addOrderResume}
                 />
 
+
                 <HeaderCard onClick={() => handleClick("side")}>
                     <GiFrenchFries />
                     <Title>Acompanhamento</Title>
@@ -245,7 +244,7 @@ const Hall = () => {
             </div>
 
             <Modal showModal={showModal} setShowModal={setShowModal} >
-                <p>Pedidos enviados com sucesso!</p>               
+                <p>Pedidos enviados com sucesso!</p>
             </Modal>
             
             <Modal showModal={showCancelModal} setShowModal={setShowCancelModal} >
