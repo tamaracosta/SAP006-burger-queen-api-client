@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import Button from '../src/components/button/Button';
 import Input from '../src/components/input/Input';
-
+import Register from '../src/pages/Register/Register';
 
 // button 
 test('click button in screen login', done => {
@@ -46,3 +46,15 @@ test('selected cook', done => {
   fireEvent.change(iptCook, { target: { value: "cozinheiro" } });
 });
 
+it('lets see Register', () => {
+  render(<Register />)
+
+  expect(screen.getByText('Nome')).toBeInTheDocument()
+  expect(screen.getByText('Email')).toBeInTheDocument()
+  expect(screen.getByText('Senha')).toBeInTheDocument()
+  expect(screen.getByText('Confirme sua senha')).toBeInTheDocument()
+  expect(screen.getByText('Selecione sua função')).toBeInTheDocument()
+  expect(screen.getByText('Atendente')).toBeInTheDocument()
+  expect(screen.getByText('Cozinheiro')).toBeInTheDocument()
+  expect(screen.getByText('Cadastre-se')).toBeInTheDocument()
+})

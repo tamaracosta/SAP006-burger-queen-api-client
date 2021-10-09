@@ -5,7 +5,7 @@ import { Title } from '../components/card/header/HeaderCardStyle';
 import HeaderCard from '../components/card/header/HeaderCard';
 import BodyCard from '../components/card/body/BodyCard';
 import { BackgroundCard, DivProduct } from '../components/card/body/BodyCardStyle.js';
-import { MdDelete , MdLocalDrink} from 'react-icons/md';
+import { MdDelete, MdLocalDrink } from 'react-icons/md';
 import Button from '../components/button/Button';
 import { DefaultTitle, Paragraph } from '../components/tipography/TipographyStyle.js';
 import Header from '../components/header/Header.js';
@@ -16,46 +16,24 @@ import Modal from '../components/modal/Modal.js';
 
 
 const Hall = () => {
-    const [breakfast, setBreakfast] = useState([]);
     const [showBreakfast, setShowBreakfast] = useState(false);
-    const [hamburguer, setHamburguer] = useState([]);
     const [showHamburguer, setShowHamburguer] = useState(false);
-    const [drink, setDrink] = useState([]);
+    const [showHamburguerDuplo, setShowHamburguerDuplo] = useState(false);
     const [showDrink, setShowDrink] = useState(false);
-    const [side, setSide] = useState([]);
     const [showSide, setShowSide] = useState(false);
-    const [nome, setNome] = useState('');
-    const [mesa, setMesa] = useState('');
-    const [pedido, setPedido] = useState([]);
+    const [nameClient, setNameClient] = useState('');
+    const [table, setTable] = useState('');
+    const [order, setOrder] = useState([]);
     const [allValue, setAllValue] = useState('');
     const [showResume, setShowResume] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    
-
+    const [menu, setMenu] = useState([]);
 
 
     useEffect(() => {
         GetAllProducts()
-            .then((json) => {
-                const breakfastList = json.filter((item) => item.type === "breakfast");
-                console.log('breakfast BQ', breakfastList);
-                setBreakfast(breakfastList);
-
-                const hamburguerList = json.filter((item) => item.sub_type === 'hamburguer');
-                console.log('hamburguer BQ', hamburguerList);
-                setHamburguer(hamburguerList);
-
-                const drinkList = json.filter((item) => item.sub_type === 'drinks');
-                console.log('drink BQ', drinkList);
-                setDrink(drinkList);
-
-                const sides = json.filter((item) => item.sub_type === 'side');
-                console.log('side BQ', sides);
-                setSide(sides);
-
-            });
+            .then((json) => setMenu(json));
     }, []);
-
 
 
     const handleClick = (typeProduct) => {
@@ -71,68 +49,87 @@ const Hall = () => {
         if (typeProduct === "side") {
             setShowSide(!showSide);
         }
+        if (typeProduct === "hamburguerDuplo") {
+            setShowHamburguerDuplo(!showHamburguerDuplo);
+        }
     }
 
 
     const handleChange = (e) => {
-        setNome(e.target.value)
+        setNameClient(e.target.value)
     };
 
     const handleChangeTable = (e) => {
-        setMesa(e.target.value)
+        setTable(e.target.value)
     };
 
 
-    const addOrderResume = (idProduct, nameProduct, currentCount, price) => {
-        const pedidoAtualizado = [
-            ...pedido.filter(item => item.id !== idProduct),
+    const addOrderResume = (idProduct, nameProduct, price, quantidade) => {
+        const updatedOrder = [
+            ...order.filter(item => item.id !== idProduct),
             {
                 id: idProduct,
-                quantidade: currentCount,
                 name: nameProduct,
                 price: price,
-                totalProductPrice: price * currentCount,
+                totalProductPrice: price * quantidade,
             },
         ];
-       
-        
-        
-        setPedido(pedidoAtualizado);
-        totalValue(pedidoAtualizado);
+
+        const updatedMenu = menu.map((item) => {
+            if(item.id === idProduct) {
+                return {...item, quantidade: quantidade}
+            }
+            return item
+        })
+
+        setMenu(updatedMenu)
+
+        setOrder(updatedOrder);
+        totalValue(updatedOrder);
     }
 
-    const enviarResume = () => {
+    const sendResume = () => {
         setShowModal(true)
-        const allProducts = pedido.map((item) => {
-            
+        const allProducts = order.map((item) => {
+
             const productsArr =
             {
                 id: item.id,
                 qtd: item.quantidade,
             }
-           
+
             return productsArr
-            
+
         })
-        PostOrders(nome, mesa, allProducts)
-        .then(console.log('oq tem aqui gay?'))
+        PostOrders(nameClient, table, allProducts)
     }
 
 
 
     const remove = (index) => {
-        const updatedList = [...pedido];
+        const updatedList = [...order];
         const deletedItems = updatedList.splice(index, 1);
         console.log(deletedItems)
-        setPedido(updatedList);
+        setOrder(updatedList);
         setAllValue(allValue - deletedItems[0].totalProductPrice);
+        console.log(setAllValue)
+
+        const updatedMenu = menu.map((item) => {
+            if(item.id === deletedItems[0].id) {
+                return {...item, quantidade: 0 }
+            }
+            return item
+        })
+
+        setMenu(updatedMenu)
+
+
     }
+   
 
-
-
-    const totalValue = (pedidoAtual) => {
+    const totalValue = (currentOrder) => {
         let total = 0;
-        pedidoAtual.forEach(item => {
+        currentOrder.forEach(item => {
             total += item.totalProductPrice;
         })
         setAllValue(total)
@@ -141,41 +138,40 @@ const Hall = () => {
         if (total > 0) {
             setShowResume(true)
         } else {
-            setShowResume(false)
+            total = 0
         }
-        
     }
 
     return (
         <>
-        <Header showLogOut={true} />
-                      
+            <Header showLogOut={true} />
+
             <DefaultTitle>Salão</DefaultTitle>
 
             <div className="container">
                 <Input
-                label="Nome do Cliente"
-                id="name"
-                className="input"
-                name="nameClient"
-                type="text"
-                onChange={handleChange}
-                
+                    label="Nome do Cliente"
+                    id="name"
+                    className="input"
+                    name="nameClient"
+                    type="text"
+                    onChange={handleChange}
+
                 />
 
-                
+
                 <Input
-                label="Mesa"
-                className="input"
-                name="tableClient"
-                type="number"
-                onChange={handleChangeTable}
-                step="any"
-                min="0"
-                
-                /> 
-               
-                                
+                    label="Mesa do Cliente"
+                    className="input"
+                    name="tableClient"
+                    type="number"
+                    onChange={handleChangeTable}
+                    step="any"
+                    min="0"
+
+                />
+
+
             </div>
 
             <div>
@@ -184,78 +180,88 @@ const Hall = () => {
                     <GiCoffeeCup /><Title>Café da Manhã</Title>
                 </HeaderCard>
                 <BodyCard
-                    itens={breakfast}
+                    itens={menu.filter((item) => item.type === "breakfast")}
                     showCard={showBreakfast}
                     callback={addOrderResume}
                 />
 
                 <HeaderCard onClick={() => handleClick("hamburguer")}>
                     <GiHamburger />
-                    <Title>Hambúrguer</Title>
+                    <Title>Hambúrguer Simples</Title>
                 </HeaderCard>
                 <BodyCard
-                    itens={hamburguer}
+                    itens={menu.filter((item) => item.name === 'Hambúrguer simples')}
                     showCard={showHamburguer}
                     callback={addOrderResume}
                 />
+
+                <HeaderCard onClick={() => handleClick("hamburguerDuplo")}>
+                    <GiHamburger />
+                    <Title>Hambúrguer Duplo</Title>
+                </HeaderCard>
+                <BodyCard
+                    itens={menu.filter((item) => item.name === 'Hambúrguer duplo')}
+                    showCard={showHamburguerDuplo}
+                    callback={addOrderResume}
+                />
+
 
                 <HeaderCard onClick={() => handleClick("drink")}>
                     <MdLocalDrink />
                     <Title>Bebidas</Title>
                 </HeaderCard>
                 <BodyCard
-                    itens={drink}
+                    itens={menu.filter((item) => item.sub_type === 'drinks')}
                     showCard={showDrink}
                     callback={addOrderResume}
                 />
+
 
                 <HeaderCard onClick={() => handleClick("side")}>
                     <GiFrenchFries />
                     <Title>Acompanhamento</Title>
                 </HeaderCard>
                 <BodyCard
-                    itens={side}
+                    itens={menu.filter((item) => item.sub_type === 'side')}
                     showCard={showSide}
                     callback={addOrderResume}
                 />
             </div>
 
             <Modal showModal={showModal} setShowModal={setShowModal} >
-                <p>Pedidos enviados com sucesso!</p>               
+                <p>Pedidos enviados com sucesso!</p>
             </Modal>
 
 
-{/* -----------------COMANDA ---------------------*/}
+            {/* -----------------COMANDA ---------------------*/}
             {showResume ? (
-               <div className="container">
-               <BackgroundCard>
-                   <h3>Comanda</h3>
-                   <Paragraph>Cliente: {nome}</Paragraph>
-                   <Paragraph>Mesa: {mesa}</Paragraph>
+                <div className="container">
+                    <BackgroundCard>
+                        <h3>Comanda</h3>
+                        <Paragraph>Cliente: {nameClient}</Paragraph>
+                        <Paragraph>Mesa: {table}</Paragraph>
 
-                   {pedido.map((item, index) => (
-                       <DivProduct key={item.id}>
-                           <p>Id: {item.id} </p>
-                           <p>Qtd: {item.quantidade} x R${item.price} </p>
-                           <p> {item.name} </p>
-                           <p> R$ {item.totalProductPrice}</p>
+                        {order.map((item, index) => (
+                            <DivProduct key={item.id}>
+                                <p>Id: {item.id} </p>
+                                <p>Qtd: {item.quantidade} x R$ {item.price} </p>
+                                <p> {item.name} </p>
+                                <p> R$ {item.totalProductPrice}</p>
 
-                           <MdDelete onClick={() => remove(index)} style={{ color: '#d13030', cursor: 'pointer' }} />
+                                <MdDelete onClick={() => remove(index)} style={{ color: '#d13030', cursor: 'pointer' }} />
 
-                       </DivProduct>
-                   ))}
+                            </DivProduct>
+                        ))}
 
-                   <Paragraph>Valor Total: R${allValue} </Paragraph>
-                   <Button onClick={() => enviarResume()}>Enviar</Button>
-               </BackgroundCard>
+                        <Paragraph>Valor Total: R$ {allValue } </Paragraph>
+                        <Button onClick={() => sendResume()}>Enviar</Button>
+                    </BackgroundCard>
 
-           </div>)
-        : null}
-        
+                </div>
+            ) : null}
+
         </>
     )
-
-
 }
 
 

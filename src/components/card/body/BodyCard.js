@@ -2,8 +2,9 @@ import { BackgroundCard, DivProduct } from './BodyCardStyle';
 import ToggleBtn from './ToggleBtn';
 
 
-const BodyCard = ({ itens, showCard, callback }) => {
+const BodyCard = ({itens, showCard, callback }) => {
  
+
     return (
         <div className="container">
             <BackgroundCard style={{ 'display': (showCard ? 'block' : 'none') }}>
@@ -12,11 +13,14 @@ const BodyCard = ({ itens, showCard, callback }) => {
                     <DivProduct key={item.id}>
                         <p> {item.name} </p>
                         <p> R$ {item.price} </p>
+                        <p>{item.flavor}</p>
+                        <p>{item.complement}</p>
                         <ToggleBtn 
                              callback={callback}
                              idProduct={item.id}
                              nameProduct={item.name}
                              price={item.price}
+                             quantidade={item.quantidade}
                             />
                     </DivProduct>
                 )
