@@ -6,58 +6,33 @@ import HeaderCard from '../components/card/header/HeaderCard';
 import BodyCard from '../components/card/body/BodyCard';
 import { BackgroundCard, DivProduct } from '../components/card/body/BodyCardStyle.js';
 import { MdDelete , MdLocalDrink} from 'react-icons/md';
-import Button from '../components/button/Button';
 import { DefaultTitle, Paragraph } from '../components/tipography/TipographyStyle.js';
 import Header from '../components/header/Header.js';
 import Input from '../components/input/Input.js';
 import Modal from '../components/modal/Modal.js';
-
-
-
-
+import { GreenButton, RedButton, SecundaryButton} from '../components/button/ButtonStyle.js';
+import { Link } from 'react-router-dom';
 
 const Hall = () => {
-    const [breakfast, setBreakfast] = useState([]);
     const [showBreakfast, setShowBreakfast] = useState(false);
-    const [hamburguer, setHamburguer] = useState([]);
     const [showHamburguer, setShowHamburguer] = useState(false);
-    const [drink, setDrink] = useState([]);
+    const [showHamburguerDuplo, setShowHamburguerDuplo] = useState(false);
     const [showDrink, setShowDrink] = useState(false);
-    const [side, setSide] = useState([]);
     const [showSide, setShowSide] = useState(false);
-    const [nome, setNome] = useState('');
-    const [mesa, setMesa] = useState('');
-    const [pedido, setPedido] = useState([]);
+    const [nameClient, setNameClient] = useState('');
+    const [table, setTable] = useState('');
+    const [order, setOrder] = useState([]);
     const [allValue, setAllValue] = useState('');
     const [showResume, setShowResume] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [showCancelModal, setShowCancelModal] = useState(false);
+    const [menu, setMenu] = useState([]);
     
-
-
-
     useEffect(() => {
         GetAllProducts()
-            .then((json) => {
-                const breakfastList = json.filter((item) => item.type === "breakfast");
-                console.log('breakfast BQ', breakfastList);
-                setBreakfast(breakfastList);
-
-                const hamburguerList = json.filter((item) => item.sub_type === 'hamburguer');
-                console.log('hamburguer BQ', hamburguerList);
-                setHamburguer(hamburguerList);
-
-                const drinkList = json.filter((item) => item.sub_type === 'drinks');
-                console.log('drink BQ', drinkList);
-                setDrink(drinkList);
-
-                const sides = json.filter((item) => item.sub_type === 'side');
-                console.log('side BQ', sides);
-                setSide(sides);
-
-            });
+        .then((json) => setMenu(json));
+                           
     }, []);
-
-
 
     const handleClick = (typeProduct) => {
         if (typeProduct === "breakfast") {
@@ -72,86 +47,130 @@ const Hall = () => {
         if (typeProduct === "side") {
             setShowSide(!showSide);
         }
+        if (typeProduct === "hamburguerDuplo") {
+            setShowHamburguerDuplo(!showHamburguerDuplo);
+        }
     }
 
-
     const handleChange = (e) => {
-        setNome(e.target.value)
+        setNameClient(e.target.value)
     };
 
     const handleChangeTable = (e) => {
-        setMesa(e.target.value)
+        setTable(e.target.value)
     };
 
 
-    const addOrderResume = (idProduct, nameProduct, currentCount, price) => {
-        const pedidoAtualizado = [
-            ...pedido.filter(item => item.id !== idProduct),
-            {
-                id: idProduct,
-                quantidade: currentCount,
-                name: nameProduct,
-                price: price,
-                totalProductPrice: price * currentCount,
-            },
+    const addOrderResume = (idProduct, nameProduct, price, quantityProduct, flavor, complement) => {
+    
+        let updatedOrder = [
+            ...order.filter(item => item.id !== idProduct),
         ];
-       
-        
-        
-        setPedido(pedidoAtualizado);
-        totalValue(pedidoAtualizado);
-    }
 
-    const enviarResume = () => {
-        setShowModal(true)
-        const allProducts = pedido.map((item) => {
-            
-            const productsArr =
-            {
-                id: item.id,
-                qtd: item.quantidade,
+        if(quantityProduct > 0) {
+            updatedOrder.push(
+                {
+                    id: idProduct,
+                    quantity: quantityProduct,
+                    name: nameProduct,
+                    price: price,
+                    totalProductPrice: price * quantityProduct,
+                    flavor: flavor,
+                    complement: complement
+
+                }
+            );
+        }
+
+        const updatedMenu = menu.map((item) => {
+            if(item.id === idProduct) {
+                return {...item, quantity: quantityProduct}
             }
-           
-            return productsArr
-            
+            return item
         })
-        PostOrders(nome, mesa, allProducts)
-        .then(console.log('oq tem aqui gay?'))
+
+        setMenu(updatedMenu)
+        
+        setOrder(updatedOrder);
+        totalValue(updatedOrder);
     }
 
+    const sendResume = () => {      
+        if (nameClient !== '' && table !== '' && order.length > 0) {
+            
+            const allProducts = order.map((item) => {
+                 const productsArr =
+                {
+                    id: item.id,
+                    qtd: item.quantity,
+                }
+                return productsArr
+            })
 
+            PostOrders(nameClient, table, allProducts).then(() => {
+                setShowModal(true);
+                setShowResume(false);
+            })
+            
+        }
+        
+    }
 
     const remove = (index) => {
-        const updatedList = [...pedido];
+        const updatedList = [...order];
         const deletedItems = updatedList.splice(index, 1);
-        console.log(deletedItems)
-        setPedido(updatedList);
+        setOrder(updatedList);
         setAllValue(allValue - deletedItems[0].totalProductPrice);
-    }
 
 
-
-    const totalValue = (pedidoAtual) => {
+        const updatedMenu = menu.map((item) => {
+            if(item.id === deletedItems[0].id) {
+                return {...item, quantity: 0 }
+            }
+            return item
+            })
+            setMenu(updatedMenu)
+        }
+        
+    const totalValue = (currentOrder) => {
         let total = 0;
-        pedidoAtual.forEach(item => {
+        currentOrder.forEach(item => {
             total += item.totalProductPrice;
         })
         setAllValue(total)
-        console.log(total)
-
+        
         if (total > 0) {
             setShowResume(true)
         } else {
             setShowResume(false)
         }
-        
     }
+
+    const confirmCancelResume = () => {
+        if (nameClient === '' || table=== '') {
+            setShowCancelModal(false)
+           } else {
+            setShowCancelModal(true)
+           }
+    }
+
+    const cancelResume = () => {
+        setShowCancelModal(false)
+        setShowResume(false)
+    }
+
+    const msgError = (nameClient === '' || table === '') ? <p style={{color: 'red'}}><i>Por gentileza, preencha os dados do Cliente</i></p> : null;
 
     return (
         <>
-        <Header showLogOut={true} />
-                      
+            <Header showLogOut={true} />
+                        
             <DefaultTitle>Salão</DefaultTitle>
+            <div className="container">
+                <Link to="/readyorders"><SecundaryButton>Pedidos Prontos</SecundaryButton></Link>
+                    
+                <Link to="/deliveredorders"><SecundaryButton>Pedidos Entregues</SecundaryButton></Link>
+            </div>
 
             <div className="container">
                 <Input
@@ -160,43 +179,47 @@ const Hall = () => {
                 className="input"
                 name="nameClient"
                 type="text"
-                onChange={handleChange}
-                
+                onChange={handleChange}                               
                 />
-
                 
                 <Input
-                label="Mesa"
+                label="Mesa do Cliente"
                 className="input"
                 name="tableClient"
                 type="number"
                 onChange={handleChangeTable}
                 step="any"
-                min="0"
-                
-                /> 
-               
-                                
+                min="0"                               
+                />                                            
             </div>
 
             <div>
-
                 <HeaderCard onClick={() => handleClick("breakfast")}>
                     <GiCoffeeCup /><Title>Café da Manhã</Title>
                 </HeaderCard>
                 <BodyCard
-                    itens={breakfast}
+                    itens={menu.filter((item) => item.type === "breakfast")}
                     showCard={showBreakfast}
                     callback={addOrderResume}
                 />
 
                 <HeaderCard onClick={() => handleClick("hamburguer")}>
                     <GiHamburger />
-                    <Title>Hambúrguer</Title>
+                    <Title>Hambúrguer Simples</Title>
                 </HeaderCard>
                 <BodyCard
-                    itens={hamburguer}
+                    itens={menu.filter((item) => item.name === 'Hambúrguer simples')}
                     showCard={showHamburguer}
+                    callback={addOrderResume}
+                />
+
+                <HeaderCard onClick={() => handleClick("hamburguerDuplo")}>
+                    <GiHamburger />
+                    <Title>Hambúrguer Duplo</Title>
+                </HeaderCard>
+                <BodyCard
+                    itens={menu.filter((item) => item.name === 'Hambúrguer duplo')}
+                    showCard={showHamburguerDuplo}
                     callback={addOrderResume}
                 />
 
@@ -205,7 +228,7 @@ const Hall = () => {
                     <Title>Bebidas</Title>
                 </HeaderCard>
                 <BodyCard
-                    itens={drink}
+                    itens={menu.filter((item) => item.sub_type === 'drinks')}
                     showCard={showDrink}
                     callback={addOrderResume}
                 />
@@ -215,7 +238,7 @@ const Hall = () => {
                     <Title>Acompanhamento</Title>
                 </HeaderCard>
                 <BodyCard
-                    itens={side}
+                    itens={menu.filter((item) => item.sub_type === 'side')}
                     showCard={showSide}
                     callback={addOrderResume}
                 />
@@ -224,41 +247,48 @@ const Hall = () => {
             <Modal showModal={showModal} setShowModal={setShowModal} >
                 <p>Pedidos enviados com sucesso!</p>               
             </Modal>
+            
+            <Modal showModal={showCancelModal} setShowModal={setShowCancelModal} >
+                <p>Você deseja cancelar esse pedido?</p> 
+                <div style={{textAlign: 'center'}}>  
+                    <RedButton style={{width: '150px'}} onClick={() => cancelResume()}>Cancelar</RedButton>   
+                </div>         
+            </Modal>
 
-
-{/* -----------------COMANDA ---------------------*/}
+    {/* -----------------COMANDA ---------------------*/}
             {showResume ? (
-               <div className="container">
-               <BackgroundCard>
-                   <h3>Comanda</h3>
-                   <Paragraph>Cliente: {nome}</Paragraph>
-                   <Paragraph>Mesa: {mesa}</Paragraph>
+                <div className="container resume">
+                    <BackgroundCard>
+                        <h3>Comanda</h3>
+                        {msgError}
+                        <Paragraph>Cliente: {nameClient}</Paragraph>
+                        <Paragraph>Mesa: {table}</Paragraph>
+                
+                        {order.map((item, index) => (
+                            <DivProduct key={item.id}>
+                                <p>Qtd: {item.quantity} x {item.price} </p>
+                                <p> {item.name} </p>                       
+                                <p>{item.flavor}</p>
+                                <p>{item.complement}</p>
+                                <p> R$ {item.totalProductPrice}</p>
 
-                   {pedido.map((item, index) => (
-                       <DivProduct key={item.id}>
-                           <p>Id: {item.id} </p>
-                           <p>Qtd: {item.quantidade} x R${item.price} </p>
-                           <p> {item.name} </p>
-                           <p> R$ {item.totalProductPrice}</p>
+                                <MdDelete onClick={() => remove(index)} style={{ color: '#d13030', cursor: 'pointer' }} />
+                            </DivProduct>
 
-                           <MdDelete onClick={() => remove(index)} style={{ color: '#d13030', cursor: 'pointer' }} />
+                        ))}
 
-                       </DivProduct>
-                   ))}
+                        <Paragraph>Valor Total: R${allValue} </Paragraph>
+                        <GreenButton onClick={() => sendResume()}>Enviar</GreenButton>
+                        <RedButton onClick={() => confirmCancelResume()}>Cancelar</RedButton>
+                    </BackgroundCard>
 
-                   <Paragraph>Valor Total: R${allValue} </Paragraph>
-                   <Button onClick={() => enviarResume()}>Enviar</Button>
-               </BackgroundCard>
-
-           </div>)
-        : null}
-        
+                </div>)
+            : null}
+            
         </>
     )
 
-
 }
-
 
 export default Hall
 
