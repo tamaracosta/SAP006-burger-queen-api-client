@@ -5,15 +5,13 @@ import { Title } from '../components/card/header/HeaderCardStyle';
 import HeaderCard from '../components/card/header/HeaderCard';
 import BodyCard from '../components/card/body/BodyCard';
 import { BackgroundCard, DivProduct } from '../components/card/body/BodyCardStyle.js';
-import { MdDelete, MdLocalDrink } from 'react-icons/md';
-import Button from '../components/button/Button';
+import { MdDelete , MdLocalDrink} from 'react-icons/md';
 import { DefaultTitle, Paragraph } from '../components/tipography/TipographyStyle.js';
 import Header from '../components/header/Header.js';
 import Input from '../components/input/Input.js';
 import Modal from '../components/modal/Modal.js';
-
-
-
+import { GreenButton, RedButton, SecundaryButton} from '../components/button/ButtonStyle.js';
+import { Link } from 'react-router-dom';
 
 const Hall = () => {
     const [showBreakfast, setShowBreakfast] = useState(false);
@@ -27,14 +25,14 @@ const Hall = () => {
     const [allValue, setAllValue] = useState('');
     const [showResume, setShowResume] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const [showCancelModal, setShowCancelModal] = useState(false);
     const [menu, setMenu] = useState([]);
-
-
+    
     useEffect(() => {
         GetAllProducts()
-            .then((json) => setMenu(json));
+        .then((json) => setMenu(json));
+                           
     }, []);
-
 
     const handleClick = (typeProduct) => {
         if (typeProduct === "breakfast") {
@@ -54,7 +52,6 @@ const Hall = () => {
         }
     }
 
-
     const handleChange = (e) => {
         setNameClient(e.target.value)
     };
@@ -64,77 +61,83 @@ const Hall = () => {
     };
 
 
-    const addOrderResume = (idProduct, nameProduct, price, quantidade) => {
-        const updatedOrder = [
+    const addOrderResume = (idProduct, nameProduct, price, quantityProduct, flavor, complement) => {
+    
+        let updatedOrder = [
             ...order.filter(item => item.id !== idProduct),
-            {
-                id: idProduct,
-                name: nameProduct,
-                price: price,
-                totalProductPrice: price * quantidade,
-            },
         ];
+
+        if(quantityProduct > 0) {
+            updatedOrder.push(
+                {
+                    id: idProduct,
+                    quantity: quantityProduct,
+                    name: nameProduct,
+                    price: price,
+                    totalProductPrice: price * quantityProduct,
+                    flavor: flavor,
+                    complement: complement
+
+                }
+            );
+        }
 
         const updatedMenu = menu.map((item) => {
             if(item.id === idProduct) {
-                return {...item, quantidade: quantidade}
+                return {...item, quantity: quantityProduct}
             }
             return item
         })
 
         setMenu(updatedMenu)
-
         setOrder(updatedOrder);
         totalValue(updatedOrder);
     }
 
-    const sendResume = () => {
-        setShowModal(true)
-        const allProducts = order.map((item) => {
+    const sendResume = () => {      
+        if (nameClient !== '' && table !== '' && order.length > 0) {
+            
+            const allProducts = order.map((item) => {
+                 const productsArr =
+                {
+                    id: item.id,
+                    qtd: item.quantity,
+                }
+                return productsArr
+            })
 
-            const productsArr =
-            {
-                id: item.id,
-                qtd: item.quantidade,
-            }
-
-            return productsArr
-
-        })
-        PostOrders(nameClient, table, allProducts)
+            PostOrders(nameClient, table, allProducts).then(() => {
+                setShowModal(true);
+                setShowResume(false);
+            })
+            
+        }
+        
     }
-
-
 
     const remove = (index) => {
         const updatedList = [...order];
         const deletedItems = updatedList.splice(index, 1);
-        console.log(deletedItems)
         setOrder(updatedList);
         setAllValue(allValue - deletedItems[0].totalProductPrice);
-        console.log(setAllValue)
+
 
         const updatedMenu = menu.map((item) => {
             if(item.id === deletedItems[0].id) {
-                return {...item, quantidade: 0 }
+                return {...item, quantity: 0 }
             }
             return item
-        })
-
-        setMenu(updatedMenu)
-
-
-    }
-   
-
+            })
+            setMenu(updatedMenu)
+        }
+        
     const totalValue = (currentOrder) => {
         let total = 0;
         currentOrder.forEach(item => {
             total += item.totalProductPrice;
         })
         setAllValue(total)
-        console.log(total)
-
+        
         if (total > 0) {
             setShowResume(true)
         } else {
@@ -142,40 +145,53 @@ const Hall = () => {
         }
     }
 
+    const confirmCancelResume = () => {
+        if (nameClient === '' || table=== '') {
+            setShowCancelModal(false)
+           } else {
+            setShowCancelModal(true)
+           }
+    }
+
+    const cancelResume = () => {
+        setShowCancelModal(false)
+        setShowResume(false)
+    }
+
+    const msgError = (nameClient === '' || table === '') ? <p style={{color: 'red'}}><i>Por gentileza, preencha os dados do Cliente</i></p> : null;
+
     return (
         <>
             <Header showLogOut={true} />
-
             <DefaultTitle>Salão</DefaultTitle>
+            <div className="container">
+                <Link to="/readyorders"><SecundaryButton>Pedidos Prontos</SecundaryButton></Link>
+                    
+                <Link to="/deliveredorders"><SecundaryButton>Pedidos Entregues</SecundaryButton></Link>
+            </div>
 
             <div className="container">
                 <Input
-                    label="Nome do Cliente"
-                    id="name"
-                    className="input"
-                    name="nameClient"
-                    type="text"
-                    onChange={handleChange}
-
+                label="Nome do Cliente"
+                id="name"
+                className="input"
+                name="nameClient"
+                type="text"
+                onChange={handleChange}                               
                 />
-
-
+                
                 <Input
-                    label="Mesa do Cliente"
-                    className="input"
-                    name="tableClient"
-                    type="number"
-                    onChange={handleChangeTable}
-                    step="any"
-                    min="0"
-
-                />
-
-
+                label="Mesa do Cliente"
+                className="input"
+                name="tableClient"
+                type="number"
+                onChange={handleChangeTable}
+                step="any"
+                min="0"                               
+                />                                            
             </div>
 
             <div>
-
                 <HeaderCard onClick={() => handleClick("breakfast")}>
                     <GiCoffeeCup /><Title>Café da Manhã</Title>
                 </HeaderCard>
@@ -205,7 +221,6 @@ const Hall = () => {
                     callback={addOrderResume}
                 />
 
-
                 <HeaderCard onClick={() => handleClick("drink")}>
                     <MdLocalDrink />
                     <Title>Bebidas</Title>
@@ -231,39 +246,48 @@ const Hall = () => {
             <Modal showModal={showModal} setShowModal={setShowModal} >
                 <p>Pedidos enviados com sucesso!</p>
             </Modal>
+            
+            <Modal showModal={showCancelModal} setShowModal={setShowCancelModal} >
+                <p>Você deseja cancelar esse pedido?</p> 
+                <div style={{textAlign: 'center'}}>  
+                    <RedButton style={{width: '150px'}} onClick={() => cancelResume()}>Cancelar</RedButton>   
+                </div>         
+            </Modal>
 
-
-            {/* -----------------COMANDA ---------------------*/}
+    {/* -----------------COMANDA ---------------------*/}
             {showResume ? (
-                <div className="container">
+                <div className="container resume">
                     <BackgroundCard>
                         <h3>Comanda</h3>
+                        {msgError}
                         <Paragraph>Cliente: {nameClient}</Paragraph>
                         <Paragraph>Mesa: {table}</Paragraph>
-
+                
                         {order.map((item, index) => (
                             <DivProduct key={item.id}>
-                                <p>Id: {item.id} </p>
-                                <p>Qtd: {item.quantidade} x R$ {item.price} </p>
-                                <p> {item.name} </p>
+                                <p>Qtd: {item.quantity} x {item.price} </p>
+                                <p> {item.name} </p>                       
+                                <p>{item.flavor}</p>
+                                <p>{item.complement}</p>
                                 <p> R$ {item.totalProductPrice}</p>
 
                                 <MdDelete onClick={() => remove(index)} style={{ color: '#d13030', cursor: 'pointer' }} />
-
                             </DivProduct>
+
                         ))}
 
-                        <Paragraph>Valor Total: R$ {allValue } </Paragraph>
-                        <Button onClick={() => sendResume()}>Enviar</Button>
+                        <Paragraph>Valor Total: R${allValue} </Paragraph>
+                        <GreenButton onClick={() => sendResume()}>Enviar</GreenButton>
+                        <RedButton onClick={() => confirmCancelResume()}>Cancelar</RedButton>
                     </BackgroundCard>
 
-                </div>
-            ) : null}
-
+                </div>)
+            : null}
+            
         </>
     )
-}
 
+}
 
 export default Hall
 

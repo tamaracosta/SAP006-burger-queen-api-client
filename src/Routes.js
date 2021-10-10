@@ -4,6 +4,8 @@ import Register from './pages/register/Register';
 import Notfound from './pages/NotFound';
 import Hall from './pages/Hall';
 import Kitchen from './pages/Kitchen';
+import ReadyOrders from './pages/ReadyOrders'
+import DeliveredOrders from './pages/DeliveredOrders'
 
 
 const Routes = () => {
@@ -26,6 +28,9 @@ const Routes = () => {
                 <Route path="/register" component={Register} />
                 <PrivateRoute path="/hall" component={Hall} />
                 <PrivateRoute path="/kitchen" component={Kitchen} />
+                <PrivateRoute path="/readyorders" component={ReadyOrders} />
+                <PrivateRoute path="/deliveredorders" component={DeliveredOrders} />
+                
                 <Route path="*" component={Notfound} />
             </Switch>
         </BrowserRouter>

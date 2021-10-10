@@ -9,9 +9,6 @@ border-radius: 10px;
 box-shadow: 0 0 1em orange;
 margin-bottom: 1.5em;
 
-
-
-
 `
 export const DivProduct = styled.div `
 display: flex;
@@ -29,5 +26,13 @@ justify-content: space-between;
 margin: 0.8em auto;
 padding: 0.5em;
 
+
+`
+export const DivProductResume = styled.div `
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+align-items: center;
+margin: 0.8em auto;
 
 `
