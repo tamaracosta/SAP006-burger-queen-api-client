@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Hamburgueria Ovni Burguer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. 🎯Produto
+![logo-ovni](src/assets/logo-ovni.png)
 
-## Available Scripts
+Ovni Burguer é uma aplicação desenvolvida pensando na experiência do funcionário que necessita lidar todos os dias com os pedidos de seus clientes. O garçom precisa anotar os pedidos de forma simples, objetiva e eficiente e quando enviar para a cozinha, o responsável pela preparação deste alimento precisa saber os pedidos pendentes e marcar os que ele já finalizou e avisar no aplicativo para o garçom que o pedido já pode ser entregue.
 
-In the project directory, you can run:
+## 2. 👩🧑Histórias de Usuário
 
-### `yarn start`
+![historias-de-usuario](src/assets/historias_de_usuario.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 3. 🎨Desenho da Interface de Usuário (protótipo de baixa fidelidade)
+![prototipo-baixa-fidelidade](src/assets/rabiscoframe.png)
+![prototipo-baixa-fidelidade](src/assets/prototipo.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
+## 4. Como funciona?
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Neste vídeo mostra um pouco as funcionalidades como:
+1) Cadastro e Login do usuário;
+2) Rota direcionada para o setor cadastrado;
+3) Seleção dos produtos que aparecem diretamente na comanda onde se tem a opção de excluir;
+4) Alerta para o garçom quando tem algum pedido pronto para ser entregue ao cliente final;
+5) Possibilidade de marcar o pedido como entregue e ver o histórico;
+6) Pedidos chegam para a cozinha ordenados, conforme a solicitação.
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+## 7. 👨‍💻Objetivos de aprendizagem
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+O objetivo principal de aprendizagem deste projeto desenvolvido durante o bootcamp da Laboratoria é aprender a construir uma aplicação SPA com o uso da biblioteca React. Além do React utilizamos para o CSS, styled components.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Javascript
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### React
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Swagger (consumir dados da API)
 
-## Learn More
+#### Testing
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Git e Github
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### 👩‍🔧Desenvolvedoras
+- [@tamaracosta](https://www.github.com/tamaracosta) 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [@tauanapacheco](https://github.com/Tauana-Pacheco) 
