@@ -80,7 +80,6 @@ const Kitchen = () => {
                         <Paragraph style={{fontSize:"1.5em"}}>Status: {item.status}</Paragraph>
                         <Paragraph>Nome: {item.client_name}</Paragraph>
                         <Paragraph>Mesa: {item.table}</Paragraph>
-                        {item.Products.map((product) =>
                             <div className="container">
                                 {item.Products.map((product) =>
                                     <p>{product.qtd} {product.name} {product.flavor} {product.complement}</p>                                   
@@ -88,7 +87,7 @@ const Kitchen = () => {
                                 )}
                             </div>
 
-                        )}
+                       
                         <div>
                             <GreenButton onClick={() => changeStatus(item, 'Preparar')}> Preparar </GreenButton >
                             <SecundaryButton onClick={() => changeStatus(item, 'Finalizar')} > Finalizar </SecundaryButton >
