@@ -8,10 +8,14 @@ import { BackgroundCard, DivProduct } from '../components/card/body/BodyCardStyl
 import { MdDelete , MdLocalDrink} from 'react-icons/md';
 import { DefaultTitle, Paragraph } from '../components/tipography/TipographyStyle.js';
 import Header from '../components/header/Header.js';
-import Input from '../components/input/Input.js';
 import Modal from '../components/modal/Modal.js';
-import { GreenButton, RedButton, SecundaryButton} from '../components/button/ButtonStyle.js';
+import { GreenButton, OrderButton, RedButton} from '../components/button/ButtonStyle.js';
 import { Link } from 'react-router-dom';
+import { GetOrders } from '../services/products';
+import { ClientData } from '../components/input/InputStyle.js';
+
+
+
 
 const Hall = () => {
     const [showBreakfast, setShowBreakfast] = useState(false);
@@ -27,13 +31,26 @@ const Hall = () => {
     const [showModal, setShowModal] = useState(false);
     const [showCancelModal, setShowCancelModal] = useState(false);
     const [menu, setMenu] = useState([]);
+    const [readyOrder, setReadyOrder] = useState([]);
+  
     
     useEffect(() => {
         GetAllProducts()
         .then((json) => setMenu(json));
+
+        GetOrders()
+        .then((json) => {
+            
+            const pedidosFinalizados = json.filter((item) => item.status === 'Finalizado');
+            setReadyOrder((pedidosFinalizados) ? pedidosFinalizados.length : 0)
+            
+            
+        
+        })
                            
     }, []);
 
+    
     const handleClick = (typeProduct) => {
         if (typeProduct === "breakfast") {
             setShowBreakfast(!showBreakfast);
@@ -160,38 +177,24 @@ const Hall = () => {
 
     const msgError = (nameClient === '' || table === '') ? <p style={{color: 'red'}}><i>Por gentileza, preencha os dados do Cliente</i></p> : null;
 
+    const alertReadyOrder =  (readyOrder > 0)
+    ?  <> ({readyOrder}) </>
+    : null;
+
     return (
         <>
             <Header showLogOut={true} />
             <DefaultTitle>Salão</DefaultTitle>
-            <div className="container">
-                <Link to="/readyorders"><SecundaryButton>Pedidos Prontos</SecundaryButton></Link>
-                    
-                <Link to="/deliveredorders"><SecundaryButton>Pedidos Entregues</SecundaryButton></Link>
+            <div className="container side-elements">
+                <Link to="/readyorders"><OrderButton> Pedidos Prontos
+                {alertReadyOrder}                  
+                </OrderButton> </Link>
+
+                <Link to="/deliveredorders"><OrderButton>Pedidos Entregues</OrderButton></Link>
             </div>
 
-            <div className="container">
-                <Input
-                label="Nome do Cliente"
-                id="name"
-                className="input"
-                name="nameClient"
-                type="text"
-                onChange={handleChange}                               
-                />
-                
-                <Input
-                label="Mesa do Cliente"
-                className="input"
-                name="tableClient"
-                type="number"
-                onChange={handleChangeTable}
-                step="any"
-                min="0"                               
-                />                                            
-            </div>
 
-            <div>
+            <div className="container">
                 <HeaderCard onClick={() => handleClick("breakfast")}>
                     <GiCoffeeCup /><Title>Café da Manhã</Title>
                 </HeaderCard>
@@ -242,6 +245,33 @@ const Hall = () => {
                     callback={addOrderResume}
                 />
             </div>
+            <div className="container">
+                <Paragraph>Dados do Cliente</Paragraph>
+            </div>
+            <div className="container side-elements">
+                               
+                <ClientData
+                placeholder="Nome"
+                label="Nome do Cliente"
+                id="name"
+                className="input"
+                name="nameClient"
+                type="text"
+                onChange={handleChange}                               
+                /> 
+                
+                <ClientData
+                placeholder="Mesa"
+                label="Mesa do Cliente"
+                className="input"
+                name="tableClient"
+                type="number"
+                onChange={handleChangeTable}
+                step="any"
+                min="0"                               
+                />
+                                                                      
+            </div>
 
             <Modal showModal={showModal} setShowModal={setShowModal} >
                 <p>Pedidos enviados com sucesso!</p>
@@ -262,6 +292,7 @@ const Hall = () => {
                         {msgError}
                         <Paragraph>Cliente: {nameClient}</Paragraph>
                         <Paragraph>Mesa: {table}</Paragraph>
+
                 
                         {order.map((item, index) => (
                             <DivProduct key={item.id}>

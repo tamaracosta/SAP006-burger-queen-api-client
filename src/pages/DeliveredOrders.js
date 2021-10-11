@@ -3,6 +3,7 @@ import { DefaultTitle, Paragraph } from "../components/tipography/TipographyStyl
 import { GetOrders} from '../services/products';
 import { useState, useEffect } from 'react';
 import { BackgroundCard, DivProductKitchen } from "../components/card/body/BodyCardStyle";
+import { Link } from "react-router-dom";
 
 const DeliveredOrders = () => {
 
@@ -21,24 +22,25 @@ const DeliveredOrders = () => {
     return (
         <>
             <Header showLogOut={true} />                    
-            <DefaultTitle>Pedidos Entregues</DefaultTitle>
-            
+           
+            <div className="container">
+                <DefaultTitle>Pedidos Entregues</DefaultTitle>
+                <Link to="/hall"><div style={{color: '#ce8e43', textAlign: "left"}} > Voltar</div></Link>
+            </div>
                 
             {orders.map((item) => (
                 <div className="container">
                     <BackgroundCard>
                         <DivProductKitchen  key={item.id}>
-                            <Paragraph style={{fontSize:"1.5em"}}>Status: {item.status}</Paragraph>
+                            <Paragraph>Status: {item.status}</Paragraph>
                             <Paragraph>Nome: {item.client_name}</Paragraph>
                             <Paragraph>Mesa: {item.table}</Paragraph>
+                            <div className="container">
                             {item.Products.map((product) =>
-                                <div className="teste">
-                                    <p>{product.qtd}</p>
-                                    <p>{product.name}</p>
-                                    <p>{product.flavor}</p>
-                                    <p>{product.complement}</p>
-                                </div>
+                                <p>{product.qtd} {product.name} {product.flavor} {product.complement}</p>                                   
+                               
                             )}
+                            </div>
                         </DivProductKitchen>
                     </BackgroundCard>
                 </div>                

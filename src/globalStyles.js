@@ -6,9 +6,7 @@ export default createGlobalStyle `
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    text-decoration: none;
-    
-    
+    text-decoration: none;     
 }
 
 :root {
@@ -44,11 +42,11 @@ body {
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 2em;
+    margin-top: 1.5em;
 
-    @media (min-width: 801px) {
-    width: 70%;       
-  }
+    @media (min-width: 1024px) {
+        width: 80%;       
+    } 
 }
 
 .ocultar-senha {
@@ -61,5 +59,35 @@ body {
     margin-left: -30px;
     
 }
+
+
+@keyframes up {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.effect-up {
+    animation: up 1s;
+   
+}
+
+.page-not-found {
+    background-color: white;
+    text-align: center;
+    height: 100vh;
+}
+
+.page-not-found p {
+    padding-top: 2em;
+}
+
+
+
 
 `

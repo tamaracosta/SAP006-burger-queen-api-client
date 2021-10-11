@@ -81,15 +81,13 @@ const Kitchen = () => {
                         <Paragraph>Nome: {item.client_name}</Paragraph>
                         <Paragraph>Mesa: {item.table}</Paragraph>
                         {item.Products.map((product) =>
-                            <div class="rrr">
-                                <div>
-                                    <p>{product.qtd}</p>
-                                    <p>{product.name }</p>
-                                    <p>{product.flavor}</p>
-                                    <p>{product.complement}</p>
-                                    
-                                </div>
+                            <div className="container">
+                                {item.Products.map((product) =>
+                                    <p>{product.qtd} {product.name} {product.flavor} {product.complement}</p>                                   
+                                
+                                )}
                             </div>
+
                         )}
                         <div>
                             <GreenButton onClick={() => changeStatus(item, 'Preparar')}> Preparar </GreenButton >
