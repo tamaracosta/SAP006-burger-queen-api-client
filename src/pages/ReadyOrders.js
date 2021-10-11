@@ -4,6 +4,7 @@ import { GetOrders, updateOrderStatus} from '../services/products';
 import { useState, useEffect } from 'react';
 import { BackgroundCard, DivProductKitchen } from "../components/card/body/BodyCardStyle";
 import { GreenButton } from "../components/button/ButtonStyle";
+import { Link } from "react-router-dom";
 
 const ReadyOrders = () => {
     const [orders, setOrders] = useState([]);
@@ -14,11 +15,12 @@ const ReadyOrders = () => {
                 
                 const pedidosFinalizados = json.filter((item) => item.status === 'Finalizado');
                 setOrders(pedidosFinalizados)
+               
             })
     }, [])
 
 
-    const changeStatus2 = (item, index) => {
+    const changeStatus = (item, index) => {
              
         updateOrderStatus(item.id, "Entregue").then(() => {
             const updatedList = [...orders];
@@ -32,31 +34,32 @@ const ReadyOrders = () => {
         <>
 
             <Header showLogOut={true} />                    
-            <DefaultTitle>Pedidos Prontos</DefaultTitle>
+            <div className="container">
+                <DefaultTitle>Pedidos Prontos</DefaultTitle>
+                <Link to="/hall"><div style={{color: '#ce8e43', textAlign: "left"}} > Voltar</div></Link>
+            </div>
+            
         
-                
+            <section className="container">
+            
             {orders.map((item, index) => (
-                <div className="container" key={item.id}>
-                    <BackgroundCard>
+                <div key={item.id}>
+                    <BackgroundCard className="item">
                         <DivProductKitchen  >
 
-                            <Paragraph style={{fontSize:"1.5em"}}>Status: {item.status}</Paragraph>
+                            <Paragraph>Status: {item.status}</Paragraph>
                             <Paragraph>Nome: {item.client_name}</Paragraph>
                             <Paragraph>Mesa: {item.table}</Paragraph>
+                            
+                            <div className="container">
                             {item.Products.map((product) =>
-                                <div className="teste">
-                                    
-                                    <p>{product.qtd}</p>
-                                    <p>{product.name}</p>
-                                    <p>{product.flavor}</p>
-                                    <p>{product.complement}</p>
-
-                                    
-                                </div>
+                                <p>{product.qtd} {product.name} {product.flavor} {product.complement}</p>                                   
+                               
                             )}
+                            </div>
 
                             <div>
-                                <GreenButton onClick={() => changeStatus2(item,index)}> Entregar </GreenButton >
+                                <GreenButton onClick={() => changeStatus(item,index)}> Entregar </GreenButton >
                             </div>
 
                         </DivProductKitchen>
@@ -64,7 +67,7 @@ const ReadyOrders = () => {
                 </div>
                 
             ))}
-
+            </section>
 
 
 

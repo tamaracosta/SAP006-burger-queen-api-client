@@ -9,7 +9,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import ImgBackgroundStyle from "../../components/img-background/ImgBackgroundStyle";
 import Radio from "../../components/radio/Radio";
 import { SecundaryParagraph } from "../../components/tipography/TipographyStyle";
-import { TerciaryButton } from "../../components/button/ButtonStyle";
+
 
 const Register = () => {
   const { handleChange, handleSubmit, errors } = UseForm(ErrorsMessage);
@@ -135,7 +135,7 @@ const Register = () => {
       </form>
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <p>Cadastro realizado com sucesso!</p>
-        <div style={{textAlign: "center"}}><Link to="/login"><TerciaryButton>Fazer Login</TerciaryButton></Link></div>
+        <div style={{textAlign: "center"}}><Link to="/login"><Button>Fazer Login</Button></Link></div>
         
       </Modal>
     </section>
