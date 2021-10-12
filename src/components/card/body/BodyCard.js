@@ -7,7 +7,9 @@ const BodyCard = ({itens, showCard, callback }) => {
 
     return (
         <div className="container">
+          
             <BackgroundCard style={{ 'display': (showCard ? 'block' : 'none') }}>
+               
                 {itens.map(item =>
                 (
                     <DivProduct key={item.id}>

@@ -52,12 +52,23 @@ export const Label = styled.label `
   }
 `
     
-export const InputNumber = styled(InputStyle) `
-    width: 10vw;
+export const ClientData = styled.input `
+    min-width: 260px;
+    border: none;
+    border-bottom: 2px solid #ffbb5a;
+    background-color: transparent;
+    outline: none;
+    margin: 20px;
+    padding: 5px 8px;
+    font-size: 20px;
+    color: var(--light-white);
 
+    &&::placeholder {
+    font-size: 1.2em;
+}
 
 `
-  
+
 
 
 

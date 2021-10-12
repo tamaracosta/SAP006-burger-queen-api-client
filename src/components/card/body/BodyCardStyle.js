@@ -7,7 +7,8 @@ border: 2px solid #5d3f09;
 background-color: var(--dark-grey);
 border-radius: 10px;
 box-shadow: 0 0 1em orange;
-margin-bottom: 1.5em;
+margin-bottom: 2.5em;
+animation: up 1s;
 
 `
 export const DivProduct = styled.div `
@@ -26,13 +27,10 @@ justify-content: space-between;
 margin: 0.8em auto;
 padding: 0.5em;
 
-
 `
-export const DivProductResume = styled.div `
-display: flex;
-flex-direction: row;
-justify-content: space-evenly;
-align-items: center;
-margin: 0.8em auto;
 
-`
+
+
+
+
+

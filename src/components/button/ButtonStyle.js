@@ -35,29 +35,7 @@ box-shadow: 0 0 30px 10px green;
  }
 `
 
-export const TerciaryButton = styled(SecundaryButton)`
-background: var(--light-white);
-color: var(--green);
-box-shadow: none;
-border: 2px solid var(--green);
-
-
-&:hover {
-box-shadow: 0 0 30px 10px green;
- }
-
-`
-
-export const QuarterButton = styled(TerciaryButton)`
-background: var(--dark-orange);
-color: var(--white);
-border: none;
-
-
-
-`
-
-export const RedButton = styled(TerciaryButton)`
+export const RedButton = styled(SecundaryButton)`
 background: #9d0505;
 color: var(--white);
 border: none;
@@ -71,7 +49,7 @@ border: none;
 
 `
 
-export const GreenButton = styled(TerciaryButton)`
+export const GreenButton = styled(SecundaryButton)`
 background: #138b2f;
 color: var(--white);
 border: none;
@@ -83,4 +61,20 @@ border: none;
   
 }
 
+`
+
+export const OrderButton = styled(Container)`
+  background: transparent;
+  color: #d1a673;
+  box-shadow: 0 0 26px 4px #ce8e43;
+  border: none;
+
+
+&:hover {
+  background: transparent;
+  border: none;
+  color: white;
+  box-shadow: 0 0 30px 10px white;
+
+}
 `

@@ -9,18 +9,22 @@ border: none;
 width: 100%;
 margin-bottom: 1.5em;
 
-@media screen and (min-width: 481px) {
-        width: 80%;
+&&:hover {
+    background-color: #f9ce6d;
+}
+
+/* @media screen and (min-width: 481px) {
+        width: 100%;
     }
 
    @media screen and (min-width: 768px) {
-        width: 60%;
+        width: 100%;
     }
         
     @media screen and (min-width: 1024px) {
         width: 51%;
             
-    }
+    } */
 
 
 `
@@ -32,10 +36,11 @@ align-items: center;
 
 export const Title = styled.p `
 color: var(--light-black);
-padding-left: 5em;
+/* padding-left: 5em; */
+width: 100%;
 
 @media screen and (min-width: 1200px) {
-    padding-left: 8em;
+    /* padding-left: 8em; */
     }
 
 `
