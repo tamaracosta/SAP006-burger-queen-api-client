@@ -307,7 +307,7 @@ const Hall = () => {
 
                         ))}
 
-                        <Paragraph>Valor Total: R${allValue} </Paragraph>
+                        <Paragraph>Valor Total: R$ {allValue} </Paragraph>
                         <GreenButton onClick={() => sendResume()}>Enviar</GreenButton>
                         <RedButton onClick={() => confirmCancelResume()}>Cancelar</RedButton>
                     </BackgroundCard>
