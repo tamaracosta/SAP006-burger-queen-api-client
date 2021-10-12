@@ -80,12 +80,15 @@ const Kitchen = () => {
                         <Paragraph style={{fontSize:"1.5em"}}>Status: {item.status}</Paragraph>
                         <Paragraph>Nome: {item.client_name}</Paragraph>
                         <Paragraph>Mesa: {item.table}</Paragraph>
-                            <div className="container">
-                                {item.Products.map((product) =>
-                                    <p>{product.qtd} {product.name} {product.flavor} {product.complement}</p>                                   
-                                
-                                )}
-                            </div>
+                            
+                        <div className="container">
+                            {item.Products.map((product) =>
+                            <span key={product.id}>
+                                <p>{product.qtd} {product.name} {product.flavor} {product.complement}</p>                                   
+                            </span>
+                            )}
+                        </div>
+                            
 
                        
                         <div>

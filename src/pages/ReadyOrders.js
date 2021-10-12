@@ -52,10 +52,11 @@ const ReadyOrders = () => {
                             <Paragraph>Mesa: {item.table}</Paragraph>
                             
                             <div className="container">
-                            {item.Products.map((product) =>
-                                <p>{product.qtd} {product.name} {product.flavor} {product.complement}</p>                                   
-                               
-                            )}
+                                {item.Products.map((product) =>
+                                <span key={product.id}>
+                                    <p>{product.qtd} {product.name} {product.flavor} {product.complement}</p>                                   
+                                </span>
+                                )}
                             </div>
 
                             <div>
