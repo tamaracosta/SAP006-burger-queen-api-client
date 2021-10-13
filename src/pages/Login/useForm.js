@@ -18,10 +18,15 @@ const useForm = (validation) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setValues({
+    const updatedValue = {
       ...values,
       [name]: value,
-    });
+    }
+    setValues(updatedValue);
+
+    const validations = validation(updatedValue)
+    setErrors(validations);
+    
   };
 
   const history = useHistory()
@@ -37,18 +42,16 @@ const useForm = (validation) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    (setErrors(validation(values)));
-    console.log(values);
+    const validations = validation(values)
+    setErrors(validations);
 
-    if(errors) {
+    if(validations.ok) {
       LoginWithEmailPassword(values.email, values.password)
         .then((response) => {
-          console.log('response', response.token);
-
-          if (response.code && response.code === 400) {
-            console.log(response.message)
+          
+          if (response.code && (response.code === 400 || response.code === 403)) {
+            alert(response.message)
           } else {
-           console.log('ok' , response.token);
             localStorage.setItem('token', response.token);
             localStorage.setItem("id", response.id);
 
