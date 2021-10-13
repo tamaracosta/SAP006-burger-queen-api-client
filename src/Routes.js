@@ -5,7 +5,7 @@ import Notfound from './pages/NotFound';
 import Hall from './pages/Hall';
 import Kitchen from './pages/Kitchen';
 import ReadyOrders from './pages/ReadyOrders'
-import DeliveredOrders from './pages/DeliveredOrders'
+import OrdersDelivered from './pages/OrdersDelivered'
 
 
 const Routes = () => {
@@ -29,7 +29,7 @@ const Routes = () => {
                 <PrivateRoute path="/hall" component={Hall} />
                 <PrivateRoute path="/kitchen" component={Kitchen} />
                 <PrivateRoute path="/readyorders" component={ReadyOrders} />
-                <PrivateRoute path="/deliveredorders" component={DeliveredOrders} />
+                <PrivateRoute path="/ordersdelivered" component={OrdersDelivered} />
                 
                 <Route path="*" component={Notfound} />
             </Switch>

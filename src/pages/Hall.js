@@ -14,9 +14,6 @@ import { Link } from 'react-router-dom';
 import { GetOrders } from '../services/products';
 import { ClientData } from '../components/input/InputStyle.js';
 
-
-
-
 const Hall = () => {
     const [showBreakfast, setShowBreakfast] = useState(false);
     const [showHamburguer, setShowHamburguer] = useState(false);
@@ -32,11 +29,15 @@ const Hall = () => {
     const [showCancelModal, setShowCancelModal] = useState(false);
     const [menu, setMenu] = useState([]);
     const [readyOrder, setReadyOrder] = useState([]);
+    // const [error, setError] = useState('');
   
     
     useEffect(() => {
         GetAllProducts()
-        .then((json) => setMenu(json));
+        .then((json) => setMenu(json))
+        .catch((error) => {
+            console.log('Erro na requisição. [' + error.message + ']')
+        })
 
         GetOrders()
         .then((json) => {
@@ -138,7 +139,7 @@ const Hall = () => {
                 setShowDrink(false);
                 window.scrollTo( 0, 0 );
             })
-            
+                        
         }
         
     }
@@ -201,7 +202,7 @@ const Hall = () => {
                 {alertReadyOrder}                  
                 </OrderButton> </Link>
 
-                <Link to="/deliveredorders"><OrderButton>Pedidos Entregues</OrderButton></Link>
+                <Link to="/ordersdelivered"><OrderButton>Pedidos Entregues</OrderButton></Link>
             </div>
 
 

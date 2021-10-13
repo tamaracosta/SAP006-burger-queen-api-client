@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { BackgroundCard, DivProductKitchen } from "../components/card/body/BodyCardStyle";
 import { Link } from "react-router-dom";
 
-const DeliveredOrders = () => {
+const OrdersDelivered = () => {
 
     const [orders, setOrders] = useState([]);
     
@@ -13,10 +13,11 @@ const DeliveredOrders = () => {
         GetOrders()
             .then((json) => {
                
-                const pedidosEntregues = json.filter((item) => item.status === 'Entregue');
-                setOrders(pedidosEntregues)
+                const orderDelivered = json.filter((item) => item.status === 'Entregue');
+                setOrders(orderDelivered)
 
             })
+
     }, [])
 
     return (
@@ -51,4 +52,4 @@ const DeliveredOrders = () => {
     )
 }
 
-export default DeliveredOrders;
+export default OrdersDelivered;
