@@ -29,15 +29,17 @@ const DeliveredOrders = () => {
             </div>
                 
             {orders.map((item) => (
-                <div className="container">
-                    <BackgroundCard>
-                        <DivProductKitchen  key={item.id}>
+                <div className="container" key={item.id}>
+                    <BackgroundCard >
+                        <DivProductKitchen>
                             <Paragraph>Status: {item.status}</Paragraph>
                             <Paragraph>Nome: {item.client_name}</Paragraph>
                             <Paragraph>Mesa: {item.table}</Paragraph>
                             <div className="container">
                             {item.Products.map((product) =>
+                                <span key={product.id}>
                                 <p>{product.qtd} {product.name} {product.flavor} {product.complement}</p>                                   
+                                </span>                                   
                                
                             )}
                             </div>
