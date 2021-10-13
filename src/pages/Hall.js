@@ -36,16 +36,14 @@ const Hall = () => {
         GetAllProducts()
         .then((json) => setMenu(json))
         .catch((error) => {
-            console.log('Erro na requisição. [' + error.message + ']')
+            alert('Erro na requisição. [' + error.message + ']')
         })
 
         GetOrders()
         .then((json) => {
-           
             const pedidosFinalizados = json.filter((item) => item.status === 'Finalizado');
             setReadyOrder((pedidosFinalizados) ? pedidosFinalizados.length : 0)
-                  
-         })
+        })
                            
     }, []);
 
