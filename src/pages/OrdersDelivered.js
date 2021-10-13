@@ -1,11 +1,11 @@
 import Header from "../components/header/Header";
-import { DefaultTitle, Paragraph } from "../components/tipography/TipographyStyle";
+import { DefaultTitle, Paragraph, ResumeTitle } from "../components/tipography/TipographyStyle";
 import { GetOrders} from '../services/products';
 import { useState, useEffect } from 'react';
 import { BackgroundCard, DivProductKitchen } from "../components/card/body/BodyCardStyle";
 import { Link } from "react-router-dom";
 
-const DeliveredOrders = () => {
+const OrdersDelivered = () => {
 
     const [orders, setOrders] = useState([]);
     
@@ -13,10 +13,11 @@ const DeliveredOrders = () => {
         GetOrders()
             .then((json) => {
                
-                const pedidosEntregues = json.filter((item) => item.status === 'Entregue');
-                setOrders(pedidosEntregues)
+                const orderDelivered = json.filter((item) => item.status === 'Entregue');
+                setOrders(orderDelivered)
 
             })
+
     }, [])
 
     return (
@@ -32,7 +33,7 @@ const DeliveredOrders = () => {
                 <div className="container" key={item.id}>
                     <BackgroundCard >
                         <DivProductKitchen>
-                            <Paragraph>Status: {item.status}</Paragraph>
+                            <ResumeTitle>Status: {item.status}</ResumeTitle>
                             <Paragraph>Nome: {item.client_name}</Paragraph>
                             <Paragraph>Mesa: {item.table}</Paragraph>
                             <div className="container">
@@ -51,4 +52,4 @@ const DeliveredOrders = () => {
     )
 }
 
-export default DeliveredOrders;
+export default OrdersDelivered;
