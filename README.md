@@ -27,6 +27,10 @@ Neste vídeo mostra um pouco as funcionalidades como:
 
 
 
+https://user-images.githubusercontent.com/75817559/137061306-ccbbdea9-dd92-464d-9682-ef9c40efe263.mp4
+
+
+
 
 ## 7. 👨‍💻Objetivos de aprendizagem
 
@@ -36,9 +40,9 @@ O objetivo principal de aprendizagem deste projeto desenvolvido durante o bootca
 
 #### React
 
-#### Swagger (consumir dados da API)
+#### Banco de dados
 
-#### Testing
+#### Testes Unitários
 
 #### Git e Github
 
