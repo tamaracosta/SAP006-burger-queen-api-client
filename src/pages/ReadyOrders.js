@@ -1,5 +1,5 @@
 import Header from "../components/header/Header";
-import { DefaultTitle, Paragraph } from "../components/tipography/TipographyStyle";
+import { DefaultTitle, ItalicParagraph, Paragraph } from "../components/tipography/TipographyStyle";
 import { GetOrders, updateOrderStatus} from '../services/products';
 import { useState, useEffect } from 'react';
 import { BackgroundCard, DivProductKitchen } from "../components/card/body/BodyCardStyle";
@@ -42,31 +42,33 @@ const ReadyOrders = () => {
         
             <section className="container">
             
-            {orders.map((item, index) => (
-                <div key={item.id}>
-                    <BackgroundCard className="item">
-                        <DivProductKitchen  >
+                {orders.map((item, index) => (
+                    
+                        <BackgroundCard key={item.id}>
+                            <DivProductKitchen  >
+                                <Paragraph>{item.status} em: </Paragraph>
+                                <ItalicParagraph>{new Date(item.updatedAt).toLocaleString()}</ItalicParagraph>
+                                
+                                <Paragraph>Nome: {item.client_name}</Paragraph>
+                                <Paragraph>Mesa: {item.table}</Paragraph>
+                                
+                                <div className="container">
+                                    {item.Products.map((product) =>
+                                    <span key={product.id}>
+                                        <p>{product.qtd} {product.name} {product.flavor} {product.complement}</p>                                   
+                                    </span>
+                                    )}
+                                </div>
 
-                            <Paragraph>Status: {item.status}</Paragraph>
-                            <Paragraph>Nome: {item.client_name}</Paragraph>
-                            <Paragraph>Mesa: {item.table}</Paragraph>
-                            
-                            <div className="container">
-                            {item.Products.map((product) =>
-                                <p>{product.qtd} {product.name} {product.flavor} {product.complement}</p>                                   
-                               
-                            )}
-                            </div>
+                                <div>
+                                    <GreenButton onClick={() => changeStatus(item,index)}> Entregar </GreenButton >
+                                </div>
 
-                            <div>
-                                <GreenButton onClick={() => changeStatus(item,index)}> Entregar </GreenButton >
-                            </div>
-
-                        </DivProductKitchen>
-                    </BackgroundCard>
-                </div>
-                
-            ))}
+                            </DivProductKitchen>
+                        </BackgroundCard>
+                    
+                    
+                ))}
             </section>
 
 

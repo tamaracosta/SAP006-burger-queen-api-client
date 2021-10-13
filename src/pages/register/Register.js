@@ -9,6 +9,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import ImgBackgroundStyle from "../../components/img-background/ImgBackgroundStyle";
 import Radio from "../../components/radio/Radio";
 import { SecundaryParagraph } from "../../components/tipography/TipographyStyle";
+import { ModalButton } from "../../components/button/ButtonStyle";
 
 
 const Register = () => {
@@ -114,6 +115,7 @@ const Register = () => {
               onChange={handleChange}
               value="atendente"
             />
+            
           </div>
           <div className="choose-role">
             <Radio
@@ -127,7 +129,7 @@ const Register = () => {
               value="cozinheiro"
             />
           </div>
-          
+          <SecundaryParagraph> {errors.role && errors.role}</SecundaryParagraph>
         </div>
               
         <Button onClick={()=>handleSubmit(callModal)}>Cadastre-se</Button>
@@ -135,7 +137,7 @@ const Register = () => {
       </form>
       <Modal showModal={showModal} setShowModal={setShowModal}>
         <p>Cadastro realizado com sucesso!</p>
-        <div style={{textAlign: "center"}}><Link to="/login"><Button>Fazer Login</Button></Link></div>
+        <div style={{textAlign: "center"}}><Link to="/login"><ModalButton>Fazer Login</ModalButton></Link></div>
         
       </Modal>
     </section>

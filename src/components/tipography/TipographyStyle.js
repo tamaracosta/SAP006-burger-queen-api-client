@@ -5,6 +5,14 @@ export const Paragraph = styled.p`
   margin-top: 0.7em;
 `;
 
+export const ItalicParagraph = styled(Paragraph)`
+  color: #edcca4;
+  margin-top: 0.7em;
+  font-style: italic;
+`;
+
+
+
 export const SecundaryParagraph = styled(Paragraph) `
 color: red;
 `
@@ -18,6 +26,6 @@ text-align: center;
 font-size: 1.5em;
 margin: 0.7em;
 color: var(--light-white);
-font-family: cursive;
+font-family: 'Courgette', cursive;
 
 `

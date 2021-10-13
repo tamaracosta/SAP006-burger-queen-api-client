@@ -13,20 +13,6 @@ margin-bottom: 1.5em;
     background-color: #f9ce6d;
 }
 
-/* @media screen and (min-width: 481px) {
-        width: 100%;
-    }
-
-   @media screen and (min-width: 768px) {
-        width: 100%;
-    }
-        
-    @media screen and (min-width: 1024px) {
-        width: 51%;
-            
-    } */
-
-
 `
 export const Content = styled.div `
 font-size: 1.5em;
@@ -36,11 +22,6 @@ align-items: center;
 
 export const Title = styled.p `
 color: var(--light-black);
-/* padding-left: 5em; */
 width: 100%;
-
-@media screen and (min-width: 1200px) {
-    /* padding-left: 8em; */
-    }
 
 `

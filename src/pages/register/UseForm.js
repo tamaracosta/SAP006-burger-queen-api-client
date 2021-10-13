@@ -22,26 +22,28 @@ const UseForm = (validation) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setValues({
+    const updatedValue = {
       ...values,
       [name]: value,
-    });
+    }
+    setValues(updatedValue);
+
+    const validations = validation(updatedValue)
+    setErrors(validations);
+    
   };
 
   const handleSubmit = (callback) => {
-    
-    (setErrors(validation(values)));
-    console.log(values);
+    const validations = validation(values)
+    setErrors(validations);
 
-    if(errors) {
+    if(validations.ok) {
       UserCreate(values.name, values.email, values.password, values.role)
         .then((response) => {
-          console.log(111, response)
-
-          if (response.code && response.code === 400) {
-            console.log(response.message)
+          
+          if (response.code && (response.code === 400 || response.code === 403)) {
+            alert(response.message)
           } else {
-            console.log('ok' + response.token);
             callback();
           }
 
