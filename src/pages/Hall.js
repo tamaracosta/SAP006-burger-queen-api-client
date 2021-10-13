@@ -126,6 +126,19 @@ const Hall = () => {
             PostOrders(nameClient, table, allProducts).then(() => {
                 setShowModal(true);
                 setShowResume(false);
+                setNameClient('');
+                setTable('');
+                setMenu(menu.map(item => {
+                    item.quantity = 0;
+                    return item;
+                }));
+                setOrder([]);
+                setShowBreakfast(false);
+                setShowHamburguer(false);
+                setShowHamburguerDuplo(false);
+                setShowSide(false);
+                setShowDrink(false);
+                window.scrollTo( 0, 0 );
             })
             
         }
@@ -258,6 +271,7 @@ const Hall = () => {
                 name="nameClient"
                 type="text"
                 onChange={handleChange}                               
+                value={nameClient}
                 /> 
                 
                 <ClientData
@@ -267,6 +281,7 @@ const Hall = () => {
                 name="tableClient"
                 type="number"
                 onChange={handleChangeTable}
+                value={table}
                 step="any"
                 min="0"                               
                 />
