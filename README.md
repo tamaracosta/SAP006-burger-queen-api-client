@@ -27,7 +27,10 @@ Neste vídeo mostra um pouco as funcionalidades como:
 
 
 
-https://user-images.githubusercontent.com/75817559/137061306-ccbbdea9-dd92-464d-9682-ef9c40efe263.mp4
+https://user-images.githubusercontent.com/75817559/137160705-6f6615a1-c1f4-4318-9064-f552d61a0959.mp4
+
+
+
 
 
 
