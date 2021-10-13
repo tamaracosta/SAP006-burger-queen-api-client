@@ -78,3 +78,18 @@ export const OrderButton = styled(Container)`
 
 }
 `
+export const ModalButton = styled(Container)`
+  background: var(--dark-orange);
+  color: var(--black);
+  box-shadow: none;
+  border: none;
+
+
+&:hover {
+  background: var(--light-orange);
+  border: none;
+  color: var(--black);
+  box-shadow: none;
+
+}
+`

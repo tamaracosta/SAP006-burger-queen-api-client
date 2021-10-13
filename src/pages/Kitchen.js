@@ -74,9 +74,7 @@ const Kitchen = () => {
                 <div className="container" key={item.id}  >
                     <BackgroundCard >
                         <Paragraph>Solicitado: {new Date(item.createdAt).toLocaleString()}</Paragraph>
-                        
-                        {item.status === "Finalizado" ? <Paragraph>Finalizado: {new Date(item.updatedAt).toLocaleString()}</Paragraph> : null}
-                                                
+                                                               
                         <Paragraph style={{fontSize:"1.5em"}}>Status: {item.status}</Paragraph>
                         <Paragraph>Nome: {item.client_name}</Paragraph>
                         <Paragraph>Mesa: {item.table}</Paragraph>
@@ -88,22 +86,18 @@ const Kitchen = () => {
                             </span>
                             )}
                         </div>
-                            
-
-                       
+                                                   
                         <div>
                             <GreenButton onClick={() => changeStatus(item, 'Preparar')}> Preparar </GreenButton >
                             <SecundaryButton onClick={() => changeStatus(item, 'Finalizar')} > Finalizar </SecundaryButton >
 
                         </div>
-
                         
                     </BackgroundCard>
                 </div>
                 
             ))}               
-              
-            
+                          
         </>
     )
 }
