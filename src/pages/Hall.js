@@ -29,7 +29,7 @@ const Hall = () => {
     const [showCancelModal, setShowCancelModal] = useState(false);
     const [menu, setMenu] = useState([]);
     const [readyOrder, setReadyOrder] = useState([]);
-    // const [error, setError] = useState('');
+    
   
     
     useEffect(() => {
