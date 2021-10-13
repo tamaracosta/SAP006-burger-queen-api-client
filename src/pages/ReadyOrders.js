@@ -1,5 +1,5 @@
 import Header from "../components/header/Header";
-import { DefaultTitle, ItalicParagraph, Paragraph } from "../components/tipography/TipographyStyle";
+import { DefaultTitle, ItalicParagraph, Paragraph, ResumeTitle } from "../components/tipography/TipographyStyle";
 import { GetOrders, updateOrderStatus} from '../services/products';
 import { useState, useEffect } from 'react';
 import { BackgroundCard, DivProductKitchen } from "../components/card/body/BodyCardStyle";
@@ -46,8 +46,8 @@ const ReadyOrders = () => {
                     
                         <BackgroundCard key={item.id}>
                             <DivProductKitchen  >
-                                <Paragraph>{item.status} em: </Paragraph>
-                                <ItalicParagraph>{new Date(item.updatedAt).toLocaleString()}</ItalicParagraph>
+                                <ResumeTitle>Pedido {item.id} </ResumeTitle>
+                                 <ItalicParagraph>{item.status} em: {new Date(item.updatedAt).toLocaleString()}</ItalicParagraph>
                                 
                                 <Paragraph>Nome: {item.client_name}</Paragraph>
                                 <Paragraph>Mesa: {item.table}</Paragraph>

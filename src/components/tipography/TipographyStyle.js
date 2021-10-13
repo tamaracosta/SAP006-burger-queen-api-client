@@ -11,8 +11,6 @@ export const ItalicParagraph = styled(Paragraph)`
   font-style: italic;
 `;
 
-
-
 export const SecundaryParagraph = styled(Paragraph) `
 color: red;
 `
@@ -28,4 +26,9 @@ margin: 0.7em;
 color: var(--light-white);
 font-family: 'Courgette', cursive;
 
+`
+export const ResumeTitle = styled.h2`
+color: var(--dark-orange);
+font-weight: bold;
+font-size: 1.2em;
 `

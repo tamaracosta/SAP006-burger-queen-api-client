@@ -40,13 +40,11 @@ const Hall = () => {
 
         GetOrders()
         .then((json) => {
-            
+           
             const pedidosFinalizados = json.filter((item) => item.status === 'Finalizado');
             setReadyOrder((pedidosFinalizados) ? pedidosFinalizados.length : 0)
-            
-            
-        
-        })
+                  
+         })
                            
     }, []);
 
@@ -301,7 +299,7 @@ const Hall = () => {
 
     {/* -----------------COMANDA ---------------------*/}
             {showResume ? (
-                <div className="container resume">
+                <div className="container">
                     <BackgroundCard>
                         <h3>Comanda</h3>
                         {msgError}

@@ -1,5 +1,5 @@
 import Header from "../components/header/Header";
-import { DefaultTitle, Paragraph } from "../components/tipography/TipographyStyle";
+import { DefaultTitle, Paragraph, ResumeTitle } from "../components/tipography/TipographyStyle";
 import { GetOrders} from '../services/products';
 import { useState, useEffect } from 'react';
 import { BackgroundCard, DivProductKitchen } from "../components/card/body/BodyCardStyle";
@@ -32,7 +32,7 @@ const DeliveredOrders = () => {
                 <div className="container" key={item.id}>
                     <BackgroundCard >
                         <DivProductKitchen>
-                            <Paragraph>Status: {item.status}</Paragraph>
+                            <ResumeTitle>Status: {item.status}</ResumeTitle>
                             <Paragraph>Nome: {item.client_name}</Paragraph>
                             <Paragraph>Mesa: {item.table}</Paragraph>
                             <div className="container">
