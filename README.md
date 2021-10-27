@@ -29,10 +29,14 @@ Neste vídeo mostra um pouco as funcionalidades como:
 
 https://user-images.githubusercontent.com/75817559/137160705-6f6615a1-c1f4-4318-9064-f552d61a0959.mp4
 
+### Testar a aplicação
 
+Email   | Senha | Função
+--------- | ------ | ------
+ovniadmin@gmail.com | 1234567 | atendente
+ovnicozinha@gmail.com | 1234567 | cozinheiro
 
-
-
+deploy: https://ovniburger.netlify.app/
 
 
 ## 7. 👨‍💻Objetivos de aprendizagem
